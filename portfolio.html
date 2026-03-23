@@ -1,667 +1,149 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio — Mitche Kouakou</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitche Kouakou | Portfolio Pro</title>
+    <style>
+        /* BASE & GRILLE */
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            scroll-behavior: smooth;
+        }
 
-    :root {
-      --bg: #0d0d0d;
-      --surface: #161616;
-      --border: #2a2a2a;
-      --accent: #c8f06e;
-      --accent2: #6ef0c8;
-      --text: #e8e4dc;
-      --muted: #6b6b6b;
-      --font-display: 'DM Serif Display', serif;
-      --font-mono: 'DM Mono', monospace;
-    }
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
 
-    html { scroll-behavior: smooth; }
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            animation: fadeIn 1.2s ease-out;
+        }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 14px;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+        .status { color: #baff29; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 20px; }
+        
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1; margin: 0; font-weight: 900; }
+        
+        .highlight {
+            background: linear-gradient(90deg, #7cf3d3, #baff29);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.4;
-    }
+        .btn-projects {
+            margin-top: 40px;
+            display: inline-block;
+            background: #baff29;
+            color: #000;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 5px;
+            transition: 0.3s;
+            width: fit-content;
+        }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 3rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(13,13,13,0.85);
-      backdrop-filter: blur(12px);
-    }
+        .btn-projects:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(186, 255, 41, 0.3); }
 
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
+        /* SECTION PROJETS */
+        .projects-section {
+            padding: 100px 10%;
+            background: rgba(255, 255, 255, 0.02);
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            border-left: 5px solid #baff29;
+            padding-left: 20px;
+        }
 
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-    /* ── HERO ── */
-    #accueil {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8rem 3rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
+        .project-card {
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.4s;
+        }
 
-    .hero-tag {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.2s forwards;
-    }
+        .project-card:hover {
+            border-color: #baff29;
+            transform: translateY(-10px);
+        }
 
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(3.5rem, 9vw, 8rem);
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.4s forwards;
-    }
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background: #222; /* Placeholder si pas d'image */
+            object-fit: cover;
+        }
 
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent2);
-    }
+        .project-info { padding: 20px; }
+        .project-info h3 { margin: 0 0 10px 0; color: #baff29; }
+        .project-info p { color: #aaa; font-size: 0.9rem; margin: 0; }
 
-    .hero-desc {
-      max-width: 500px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.6s forwards;
-      margin-bottom: 3rem;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      background: var(--accent);
-      color: #0d0d0d;
-      padding: 0.85rem 2rem;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      opacity: 0;
-      animation: fadeUp 0.7s 0.8s forwards;
-    }
-    .hero-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(200,240,110,0.25);
-    }
-
-    /* grid bg */
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: 0.3;
-      z-index: -1;
-    }
-
-    .hero-circle {
-      position: absolute;
-      right: -10%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(110,240,200,0.06) 0%, transparent 70%);
-      z-index: -1;
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      padding: 7rem 3rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 1.1;
-      margin-bottom: 3rem;
-    }
-
-    /* ── À PROPOS ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-      max-width: 1100px;
-    }
-
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 1.2rem;
-      font-size: 13px;
-    }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .stat-box {
-      padding: 1.8rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      transition: border-color 0.2s;
-    }
-    .stat-box:hover { border-color: var(--accent); }
-
-    .stat-number {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* ── COMPÉTENCES ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      max-width: 1100px;
-    }
-
-    .skill-card {
-      padding: 2rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .skill-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent2);
-    }
-
-    .skill-card-icon {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .skill-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      margin-bottom: 0.8rem;
-      color: var(--text);
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .tag {
-      font-size: 10px;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .tag.accent { border-color: var(--accent); color: var(--accent); }
-    .tag.accent2 { border-color: var(--accent2); color: var(--accent2); }
-
-    /* ── PROJETS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-      max-width: 1100px;
-    }
-
-    .project-card {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .project-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-    }
-
-    .project-thumb {
-      height: 160px;
-      background: linear-gradient(135deg, #1a1a1a, #222);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-thumb::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(200,240,110,0.05), rgba(110,240,200,0.05));
-    }
-
-    .project-body { padding: 1.8rem; }
-
-    .project-body h3 {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .project-body p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 1.2rem;
-      line-height: 1.7;
-    }
-
-    .project-link {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: gap 0.2s;
-    }
-    .project-link:hover { gap: 0.8rem; }
-
-    /* ── CONTACT ── */
-    .contact-inner {
-      max-width: 600px;
-    }
-
-    .contact-inner p {
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      font-size: 13px;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-
-    .form-group label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 13px;
-      padding: 0.85rem 1rem;
-      outline: none;
-      transition: border-color 0.2s;
-      resize: none;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--accent); }
-
-    .form-group textarea { min-height: 130px; }
-
-    .btn-submit {
-      align-self: flex-start;
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.9rem 2.2rem;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-submit:hover {
-      background: var(--accent);
-      color: #0d0d0d;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 0.06em;
-    }
-
-    .social-links { display: flex; gap: 1.5rem; }
-    .social-links a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .social-links a:hover { color: var(--accent); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s, transform 0.7s;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      #accueil, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .form-row { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 1rem; text-align: center; }
-    }
-  </style>
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#accueil" class="nav-logo">Mitchidigi</a>
-    <ul class="nav-links">
-      <li><a href="#apropos">À propos</a></li>
-      <li><a href="#competences">Compétences</a></li>
-      <li><a href="#projets">Projets</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <div class="grid-bg"></div>
 
-  <!-- HERO -->
-  <section id="accueil">
-    <div class="hero-grid"></div>
-    <div class="hero-circle"></div>
-    <p class="hero-tag">// Disponible pour des missions freelance</p>
-    <h1 class="hero-title">
-      Mitche<br><em>Kouakou</em><br>Développeur Web.
-    </h1>
-    <p class="hero-desc">
-      Freelance passionné, je crée des sites et applications web modernes pour particuliers et entreprises. Bilingue français / anglais, je m'adapte à vos besoins partout dans le monde.
-    </p>
-    <a href="#projets" class="hero-cta">Voir mes projets →</a>
-  </section>
+    <section class="hero">
+        <div class="status">// DIGITAL PROMPTEUR & DEV</div>
+        <h1>Mitche <span class="highlight">Kouakou</span><br>Digital Entrepreneur.</h1>
+        <a href="#projets" class="btn-projects">VOIR MES PROJETS ↓</a>
+    </section>
 
-  <!-- À PROPOS -->
-  <section id="apropos">
-    <p class="section-label reveal">// 01 — À propos</p>
-    <h2 class="section-title reveal">Qui suis-je ?</h2>
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p>Je suis Mitche Kouakou, développeur web freelance opérant sous la marque <strong style="color:var(--accent)">Mitche Prompteurs Digital</strong>. Je transforme vos idées en solutions digitales concrètes et efficaces.</p>
-        <p>Bilingue français / anglais, je travaille avec des clients locaux et internationaux. Mon objectif : livrer des projets de qualité, dans les délais, avec une communication claire à chaque étape.</p>
-        <p>Que vous ayez besoin d'un site vitrine, d'une application web ou d'une présence en ligne professionnelle, je suis là pour vous accompagner de A à Z.</p>
-      </div>
-      <div class="about-stats reveal">
-        <div class="stat-box">
-          <div class="stat-number">3+</div>
-          <div class="stat-label">Années d'expérience</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">20+</div>
-          <div class="stat-label">Projets livrés</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">15+</div>
-          <div class="stat-label">Clients satisfaits</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Curiosité</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section id="projets" class="projects-section">
+        <h2 class="section-title">Mes Réalisations</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div style="height:200px; background: url('https://via.placeholder.com/400x200') center/cover;"></div>
+                <div class="project-info">
+                    <h3>Branding MAÏGA</h3>
+                    <p>Conception d'identité visuelle 3D et logo luxe pour boutique en ligne.</p>
+                </div>
+            </div>
 
-  <!-- COMPÉTENCES -->
-  <section id="competences">
-    <p class="section-label reveal">// 02 — Compétences</p>
-    <h2 class="section-title reveal">Ce que je maîtrise</h2>
-    <div class="skills-grid">
-      <div class="skill-card reveal">
-        <div class="skill-card-icon">🌍</div>
-        <h3>Langues</h3>
-        <div class="skill-tags">
-          <span class="tag accent">Français</span>
-          <span class="tag accent2">Anglais</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-card-icon">⚡</div>
-        <h3>Développement Web</h3>
-        <div class="skill-tags">
-          <span class="tag accent">HTML / CSS</span>
-          <span class="tag accent">JavaScript</span>
-          <span class="tag">React</span>
-          <span class="tag">Responsive Design</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-card-icon">🛠</div>
-        <h3>Outils & Plateformes</h3>
-        <div class="skill-tags">
-          <span class="tag accent2">VS Code</span>
-          <span class="tag accent2">Git / GitHub</span>
-          <span class="tag">Netlify</span>
-          <span class="tag">Vercel</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-card-icon">💼</div>
-        <h3>Freelance & Digital</h3>
-        <div class="skill-tags">
-          <span class="tag accent">Gestion de projet</span>
-          <span class="tag">Communication client</span>
-          <span class="tag accent2">Livraison rapide</span>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="project-card">
+                <div style="height:200px; background: url('https://via.placeholder.com/400x200') center/cover;"></div>
+                <div class="project-info">
+                    <h3>AI Prompt Engineering</h3>
+                    <p>Génération d'images cinématiques ultra-réalistes pour campagnes publicitaires.</p>
+                </div>
+            </div>
 
-  <!-- PROJETS -->
-  <section id="projets">
-    <p class="section-label reveal">// 03 — Projets</p>
-    <h2 class="section-title reveal">Mes réalisations</h2>
-    <div class="projects-grid">
-      <div class="project-card reveal">
-        <div class="project-thumb">🌐</div>
-        <div class="project-body">
-          <h3>Site Vitrine Entreprise</h3>
-          <p>Création d'un site web professionnel pour une entreprise locale avec présentation des services, galerie et formulaire de contact.</p>
-          <div class="skill-tags" style="margin-bottom:1rem">
-            <span class="tag accent">HTML / CSS</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Responsive</span>
-          </div>
-          <a href="#" class="project-link">Voir le projet →</a>
+            <div class="project-card">
+                <div style="height:200px; background: url('https://via.placeholder.com/400x200') center/cover;"></div>
+                <div class="project-info">
+                    <h3>Web Design Premium</h3>
+                    <p>Interfaces modernes optimisées pour la conversion et le mobile.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-thumb">📱</div>
-        <div class="project-body">
-          <h3>Landing Page Produit</h3>
-          <p>Page de vente moderne et optimisée pour la conversion, avec animations, témoignages clients et appel à l'action percutant.</p>
-          <div class="skill-tags" style="margin-bottom:1rem">
-            <span class="tag accent2">React</span>
-            <span class="tag">CSS Animations</span>
-            <span class="tag">SEO</span>
-          </div>
-          <a href="#" class="project-link">Voir le projet →</a>
-        </div>
-      </div>
-      <div class="project-card reveal">
-        <div class="project-thumb">✨</div>
-        <div class="project-body">
-          <h3>Portfolio Personnel</h3>
-          <p>Portfolio sur mesure pour un client freelance avec section projets, compétences et formulaire de contact intégré.</p>
-          <div class="skill-tags" style="margin-bottom:1rem">
-            <span class="tag accent">HTML / CSS</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Netlify</span>
-          </div>
-          <a href="#" class="project-link">Voir le projet →</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="section-label reveal">// 04 — Contact</p>
-    <h2 class="section-title reveal">Travaillons ensemble</h2>
-    <div class="contact-inner reveal">
-      <p>Vous avez un projet en tête ? Contactez-moi directement à <strong style="color:var(--accent)">yveskouakou080@gmail.com</strong> ou remplissez le formulaire ci-dessous. Je vous réponds sous 24h.</p>
-      <div class="contact-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nom</label>
-            <input type="text" placeholder="Jean Dupont" />
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="jean@example.com" />
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Sujet</label>
-          <input type="text" placeholder="Projet freelance / Collaboration..." />
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea placeholder="Décrivez votre projet..."></textarea>
-        </div>
-        <button class="btn-submit" onclick="alert('Message envoyé ! Merci.')">Envoyer →</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <span>© 2026 Mitche Prompteurs Digital — Tous droits réservés</span>
-    <div class="social-links">
-      <a href="https://facebook.com/MITCHEPROMPTEURSDIGITAL" target="_blank">Facebook</a>
-      <a href="mailto:yveskouakou080@gmail.com">Email</a>
-    </div>
-  </footer>
-
-  <script>
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
 </body>
 </html>
