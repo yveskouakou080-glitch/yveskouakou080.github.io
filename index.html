@@ -3,165 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mitche Digital - Agence 360° à Bouaké. Sites Web, Marketing, Design et Guides PDF.">
-    <title>Mitche Digital | Agence de Solutions Numériques</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Mitche Digital - Solutions Numériques Premium pour Entreprises et Particuliers à Bouaké.">
+    <title>Mitche Digital | Excellence Numérique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0a0a0a; --accent: #c8f06e; --text: #ffffff; --card-bg: #1a1a1a; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 0; line-height: 1.6; scroll-behavior: smooth; }
-        .container { width: 95%; max-width: 1200px; margin: auto; padding: 20px; }
+        :root { --bg: #050505; --accent: #c8f06e; --gold: #D4AF37; --text: #f0f0f0; --card-bg: #0f0f0f; --transition: all 0.4s ease; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 0; line-height: 1.7; scroll-behavior: smooth; }
+        .container { width: 90%; max-width: 1200px; margin: auto; }
         
-        /* HEADER */
-        header { text-align: center; padding: 80px 0 40px; border-bottom: 1px solid #333; }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--accent); object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 20px rgba(200, 240, 110, 0.2); }
-        
-        .btn-whatsapp { display: inline-block; background: var(--accent); color: #000; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 20px 0; transition: var(--transition); }
-        .btn-whatsapp:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(200, 240, 110, 0.3); }
+        /* HEADER CORPORATE */
+        header { text-align: center; padding: 120px 0 60px; background: radial-gradient(circle at top, #1a1a1a 0%, #050505 100%); }
+        .profile-img { width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 25px; filter: grayscale(20%); transition: var(--transition); }
+        .profile-img:hover { filter: grayscale(0%); transform: scale(1.05); }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 10px 0; letter-spacing: -1px; }
+        header p { font-size: 1.2rem; color: #aaa; max-width: 600px; margin: 0 auto 30px; font-weight: 300; }
+
+        .btn-main { background: var(--accent); color: #000; padding: 18px 45px; border-radius: 5px; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; transition: var(--transition); display: inline-block; }
+        .btn-main:hover { background: #fff; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(200, 240, 110, 0.2); }
 
         /* SECTIONS */
-        .section-title { margin-top: 80px; font-size: 2.5rem; color: var(--accent); text-align: center; text-transform: uppercase; letter-spacing: 3px; }
-        .category-desc { text-align: center; color: #888; margin-bottom: 40px; font-size: 1.1rem; }
+        .section-header { text-align: center; margin-bottom: 60px; margin-top: 100px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--accent); margin-bottom: 10px; }
+        .section-header div { width: 60px; height: 3px; background: var(--accent); margin: auto; }
 
-        /* GRID SYSTEM */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; transition: var(--transition); display: flex; flex-direction: column; }
-        .card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        /* SERVICES GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .card { background: var(--card-bg); border: 1px solid #1a1a1a; padding: 40px; border-radius: 0px; transition: var(--transition); position: relative; display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--accent); background: #111; }
+        .card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
+        .card p { color: #888; margin-bottom: 25px; font-size: 0.95rem; flex-grow: 1; }
         
-        /* PRODUCT IMAGES (AFFICHES) */
-        .product-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #333; }
-        
-        .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .card h3 { color: var(--accent); margin: 0 0 10px 0; font-size: 1.4rem; }
-        .card p { font-size: 0.95rem; color: #ddd; margin-bottom: 20px; }
-        
-        .features { list-style: none; padding: 0; margin: 0 0 20px 0; font-size: 0.9rem; color: #bbb; }
-        .features li { margin-bottom: 8px; display: flex; align-items: center; }
-        .features li::before { content: "✔"; color: var(--accent); margin-right: 10px; font-weight: bold; }
+        .price { display: block; font-size: 1.4rem; font-weight: 600; margin-bottom: 25px; color: var(--accent); }
+        .buy-link { color: #fff; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; border-bottom: 2px solid var(--accent); padding-bottom: 5px; transition: 0.3s; }
+        .buy-link:hover { color: var(--accent); border-bottom-color: #fff; }
 
-        .price-tag { font-size: 1.6rem; font-weight: bold; color: #fff; margin-bottom: 20px; }
-        .buy-btn { display: block; background: transparent; border: 2px solid var(--accent); color: var(--accent); padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; text-align: center; transition: var(--transition); }
-        .buy-btn:hover { background: var(--accent); color: #000; }
+        /* TÉMOIGNAGES PREMIUM */
+        .testimonials { padding: 100px 0; background: #080808; margin-top: 100px; }
+        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testi-card { background: #0c0c0c; padding: 40px; border-top: 4px solid var(--accent); }
+        .testi-card p { font-style: italic; color: #ccc; margin-bottom: 20px; }
+        .testi-card span { font-weight: 700; color: var(--accent); text-transform: uppercase; font-size: 0.8rem; }
 
-        /* TESTIMONIALS */
-        .testimonials { background: #111; padding: 80px 20px; border-radius: 40px; margin-top: 100px; text-align: center; }
-        blockquote { background: #1a1a1a; padding: 30px; border-radius: 20px; border-left: 6px solid var(--accent); margin: 25px auto; font-style: italic; max-width: 800px; text-align: left; }
-
-        footer { text-align: center; padding: 100px 0; color: #666; border-top: 1px solid #333; margin-top: 100px; }
+        footer { padding: 80px 0; text-align: center; border-top: 1px solid #1a1a1a; color: #444; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <img src="1774378467067.jpeg" onerror="this.src='1000209895.jpg'" class="profile-img" alt="Mitché Kouakou">
+    <header>
+        <div class="container">
+            <img src="1774378467067.jpeg" onerror="this.src='1000209895.jpg'" class="profile-img" alt="Directeur Mitche Digital">
             <h1>Mitche <span style="color:var(--accent)">Digital</span></h1>
-            <p>Expert en Transformation Numérique & Solutions Business à Bouaké</p>
-            <a href="https://wa.me/2250150882462" class="btn-whatsapp">Lancer mon projet : 01 50 88 24 62</a>
-        </header>
+            <p>Accompagnement stratégique pour entreprises et usines. Transformation digitale haute performance.</p>
+            <a href="https://wa.me/2250150882462?text=Bonjour+Mitché+Digital,+je+souhaite+discuter+d'un+projet+stratégique+pour+mon+entreprise." class="btn-main">Consultation Gratuite</a>
+        </div>
+    </header>
 
-        <section id="web">
-            <h2 class="section-title">Web & Applications</h2>
-            <p class="category-desc">Des plateformes robustes pour digitaliser votre entreprise.</p>
-            <div class="grid">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500" class="product-img" alt="Web">
-                    <div class="card-content">
-                        <h3>Site Vitrine Pro</h3>
-                        <p>Une présence en ligne élégante pour attirer plus de clients locaux et internationaux.</p>
-                        <ul class="features"><li>Design sur mesure</li><li>Optimisé Google (SEO)</li><li>Hébergement offert</li></ul>
-                        <span class="price-tag">Dès 50.000 F</span>
-                        <a href="https://wa.me/2250150882462?text=Site+Vitrine" class="buy-btn">Commander</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=500" class="product-img" alt="Ecom">
-                    <div class="card-content">
-                        <h3>Boutique E-commerce</h3>
-                        <p>Vendez vos produits 24h/24 avec une boutique automatisée et sécurisée.</p>
-                        <ul class="features"><li>Paiement intégré</li><li>Gestion des stocks</li><li>Tableau de bord</li></ul>
-                        <span class="price-tag">Dès 85.000 F</span>
-                        <a href="https://wa.me/2250150882462?text=E-commerce" class="buy-btn">Commander</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=500" class="product-img" alt="Stock">
-                    <div class="card-content">
-                        <h3>Gestion de Stock</h3>
-                        <p>Évitez les pertes et suivez vos ventes en temps réel avec notre logiciel Ivoirien.</p>
-                        <ul class="features"><li>Alertes stock bas</li><li>Rapports journaliers</li><li>Accès multi-vendeurs</li></ul>
-                        <span class="price-tag">Sur Devis</span>
-                        <a href="https://wa.me/2250150882462?text=Gestion+Stock" class="buy-btn">Commander</a>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        
+        <section class="section-header">
+            <h2>Pôle Entreprises & Usines</h2>
+            <div></div>
         </section>
 
-        <section id="marketing">
-            <h2 class="section-title">Marketing & Boost</h2>
-            <p class="category-desc">Augmentez votre visibilité et votre autorité sur les réseaux sociaux.</p>
-            <div class="grid">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=500" class="product-img" alt="TikTok">
-                    <div class="card-content">
-                        <h3>Boost TikTok Viral</h3>
-                        <p>Obtenez des abonnés et des vues réels pour monétiser votre compte rapidement.</p>
-                        <ul class="features"><li>Abonnés qualifiés</li><li>Vues 100% réelles</li><li>Livraison express</li></ul>
-                        <span class="price-tag">Dès 5.000 F</span>
-                        <a href="https://wa.me/2250150882462?text=Boost+TikTok" class="buy-btn">Booster</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=500" class="product-img" alt="FB Ads">
-                    <div class="card-content">
-                        <h3>Publicité Facebook Pro</h3>
-                        <p>Ciblez précisément les clients à Bouaké ou Abidjan pour liquider vos stocks.</p>
-                        <ul class="features"><li>Ciblage ultra-précis</li><li>Audit gratuit</li><li>Suivi des résultats</li></ul>
-                        <span class="price-tag">Dès 20.000 F</span>
-                        <a href="https://wa.me/2250150882462?text=Pub+Facebook" class="buy-btn">Lancer la Pub</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=500" class="product-img" alt="CM">
-                    <div class="card-content">
-                        <h3>Gestion Réseaux (CM)</h3>
-                        <p>Nous gérons vos pages, créons les visuels et répondons aux clients pour vous.</p>
-                        <ul class="features"><li>3 posts / semaine</li><li>Créations visuelles</li><li>Modération</li></ul>
-                        <span class="price-tag">30.000 F/mois</span>
-                        <a href="https://wa.me/2250150882462?text=Community+Management" class="buy-btn">S'abonner</a>
-                    </div>
-                </div>
+        <div class="grid">
+            <div class="card">
+                <h3>Gestion de Stock & Flux</h3>
+                <p>Automatisation complète pour usines et entrepôts. Suivi en temps réel et rapports d'analyse de performance.</p>
+                <span class="price">Sur Devis Corporate</span>
+                <a href="https://wa.me/2250150882462?text=Bonjour+Mitché+Digital,+je+suis+intéressé+par+votre+solution+de+Gestion+de+Stock+pour+mon+usine." class="buy-link">Demander un audit</a>
             </div>
+            <div class="card">
+                <h3>Écosystème E-commerce</h3>
+                <p>Développement de plateformes de vente complexes avec intégration de paiements sécurisés et logistique.</p>
+                <span class="price">Dès 85.000 FCFA</span>
+                <a href="https://wa.me/2250150882462?text=Bonjour+Mitché+Digital,+je+souhaite+créer+une+boutique+E-commerce+professionnelle." class="buy-link">Démarrer le projet</a>
+            </div>
+            <div class="card">
+                <h3>Publicité Haute Précision</h3>
+                <p>Campagnes publicitaires ciblées (Ads) pour maximiser le retour sur investissement des grandes entreprises.</p>
+                <span class="price">Dès 20.000 FCFA</span>
+                <a href="https://wa.me/2250150882462?text=Bonjour+Mitché+Digital,+je+souhaite+lancer+une+campagne+publicitaire+professionnelle." class="buy-link">Lancer la campagne</a>
+            </div>
+        </div>
+
+        <section class="section-header">
+            <h2>La Confiance de nos Partenaires</h2>
+            <div></div>
         </section>
 
-        <section id="boutique">
-            <h2 class="section-title">Boutique de Savoir</h2>
-            <p class="category-desc">Des guides pratiques pour devenir indépendant financièrement.</p>
-            <div class="grid">
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500" class="product-img" alt="PDF FB">
-                    <div class="card-content">
-                        <h3>Vendre sur Facebook</h3>
-                        <p>Transformez votre page en machine à cash sans stock physique. Méthode 100% Afrique.</p>
-                        <ul class="features"><li>Stratégies de vente</li><li>Scripts de discussion</li><li>Accès instantané</li></ul>
-                        <span class="price-tag">5.000 F</span>
-                        <a href="https://wa.me/2250150882462?text=PDF+Facebook" class="buy-btn">Acheter le Guide</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=500" class="product-img" alt="PDF IA">
-                    <div class="card-content">
-                        <h3>Secrets de l'IA</h3>
-                        <p>Gagnez 5h par jour en utilisant ChatGPT et Midjourney pour votre business.</p>
-                        <ul class="features"><li>Prompts exclusifs</li><li>Génération d'images</li><li>Automatisation</li></ul>
-                        <span class="price-tag">3.500 F</span>
-                        <a href="https://wa.me/2250150882462?text=PDF+IA" class="buy-btn">Acheter le Guide</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1596558450268-9c27524baaf7?auto=format&fit=crop&w=500" class="product-img" alt="PDF TK">
-                    <div class="card-content">
-                        <h3>Gagner avec TikTok</h3>
-                        <p>Le plan étape par étape pour monétiser votre compte et attirer les marques.</p>
-                        <ul class="features"><li>Algorithme expliqué</li><li>Idées de niche</li><li>Monétisation</li></ul>
-                        <span class="price-tag">4.000 F</span>
-                        <a href="https://wa.me/2250150882462?text=PDF+TikTok" class="buy-btn">Acheter
+        <div class="testi-grid">
+            <div class="testi-card">
+                <p>"Le système de gestion de stock mis en place par Mitché Digital a réduit nos pertes de 40% en seulement trois mois. Une expertise rare à Bouaké."</p>
+                <span>— Directeur de Production, Usine Agro-Alimentaire</span>
+            </div>
+            <div class="testi-card">
+                <p>"Un service irréprochable. Notre visibilité sur TikTok et Facebook a explosé, nous permettant d'attirer des contrats B2B majeurs."</p>
+                <span>— Gérante, Cabinet d'Investissement</span>
+            </div>
+            <div class="testi-card">
+                <p>"Le guide sur l'IA est devenu notre manuel de référence pour optimiser le travail administratif de nos équipes."</p>
+                <span>— Fondateur de Start-up</span>
+            </div>
+        </div>
+
+        <section class="section-header">
+            <h2>Boutique de Savoir</h2>
+            <div></div>
+        </section>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Vendre sur Facebook</h3>
+                <p>Maîtrisez les algorithmes et la psychologie de vente pour dominer le marché ivoirien.</p>
+                <span class="price">5.000 FCFA</span>
+                <a href="https://wa.me/2250150882462?text=Bonjour+Mitché+Digital,+je+souhaite+acquérir+le+guide+Vendre+sur+Facebook." class="buy-link">Acquérir le guide</a>
+            </div>
+            <div class="card">
+                <h3>Secrets de l'IA</h3>
+                <p>Guide complet pour intégrer l'intelligence artificielle dans vos processus métier quotidiens.</p>
+                <span class="price">3.500 FCFA</span>
+                <a href="https://wa.me/2250150882462?text=Bonjour+Mitché+Digital,+je+souhaite+acquérir+le+guide+Secrets+de+l'IA." class="buy-link">Acquérir le guide</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p><strong>MITCHE DIGITAL GROUP</strong><br>
+        Bouaké, Côte d'Ivoire | Siège Social & Consulting<br>
+        +225 01 50 88 24 62<br><br>
+        &copy; 2026 Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
