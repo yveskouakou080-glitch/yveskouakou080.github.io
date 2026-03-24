@@ -1,155 +1,171 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitche Digital | Solutions Entreprises & Industries</title>
+    <title>Mitche Digital | Solutions 360° & IA</title>
     <style>
-        :root { --accent: #c8f06e; --gold: #d4af37; --bg: #050505; --card: #121212; --text: #e0e0e0; }
-        
+        :root { --accent: #c8f06e; --bg: #050505; --card: #111; --text: #e0e0e0; }
         * { box-sizing: border-box; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; line-height: 1.6; scroll-behavior: smooth; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 0; line-height: 1.6; scroll-behavior: smooth; }
         .container { width: 92%; max-width: 1200px; margin: auto; }
 
-        /* NAVIGATION BAR */
-        nav { background: rgba(0,0,0,0.9); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #222; text-align: center; }
-        nav a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; }
+        /* NAV */
+        nav { background: rgba(0,0,0,0.95); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #222; text-align: center; }
+        nav a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; }
 
-        /* HERO SECTION */
-        header { padding: 150px 0 80px; text-align: center; background: radial-gradient(circle, #1a1a1a 0%, #050505 100%); }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid var(--accent); object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 20px rgba(200,240,110,0.2); }
+        /* HERO */
+        header { padding: 140px 0 60px; text-align: center; background: radial-gradient(circle, #1a1a1a 0%, #050505 100%); }
+        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 20px; }
         h1 { font-size: 3rem; margin: 10px 0; letter-spacing: -1px; }
-        .hero-tagline { color: var(--accent); font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
 
-        /* SECTIONS */
-        section { padding: 80px 0; border-bottom: 1px solid #111; }
-        h2 { font-size: 2.2rem; text-align: center; color: #fff; margin-bottom: 50px; position: relative; }
-        h2::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent); margin: 10px auto; }
+        /* BARRE DE RECHERCHE */
+        .search-container { text-align: center; margin: 40px 0; position: sticky; top: 70px; z-index: 900; background: var(--bg); padding: 20px 0; }
+        #searchInput { width: 100%; max-width: 500px; padding: 15px 25px; border-radius: 50px; border: 2px solid #333; background: #111; color: #fff; font-size: 1rem; outline: none; transition: 0.3s; }
+        #searchInput:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(200, 240, 110, 0.2); }
 
-        /* CARDS & AFFICHES */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
-        .card { background: var(--card); border-radius: 15px; overflow: hidden; border: 1px solid #222; transition: 0.4s; display: flex; flex-direction: column; }
-        .card:hover { border-color: var(--accent); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
-        .affiche { width: 100%; height: 230px; object-fit: cover; border-bottom: 1px solid #222; }
-        .card-body { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
-        .card h3 { color: var(--accent); margin: 0 0 15px 0; font-size: 1.5rem; }
-        .card p { font-size: 0.95rem; color: #aaa; margin-bottom: 20px; }
-        
-        .price-badge { font-weight: bold; color: #fff; background: #1a1a1a; padding: 5px 15px; border-radius: 50px; display: inline-block; margin-bottom: 20px; border: 1px solid #333; }
+        /* GRID */
+        section { padding: 40px 0; }
+        h2 { font-size: 1.8rem; color: var(--accent); margin-bottom: 30px; text-transform: uppercase; border-left: 4px solid var(--accent); padding-left: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid #222; transition: 0.3s; display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .card-body { padding: 20px; flex-grow: 1; }
+        .card h3 { color: #fff; margin: 0 0 10px 0; font-size: 1.2rem; }
+        .card p { font-size: 0.85rem; color: #888; margin-bottom: 15px; }
 
-        /* BOUTON COMMANDE PRO */
-        .btn-order { display: block; background: var(--accent); color: #000; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: 800; text-align: center; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .btn-order:hover { background: #fff; }
+        .btn-order { display: block; background: var(--accent); color: #000; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: 800; text-align: center; text-transform: uppercase; font-size: 0.75rem; }
 
-        /* TÉMOIGNAGES PRO */
-        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .testi-card { background: #111; padding: 35px; border-radius: 15px; border-left: 5px solid var(--accent); }
-        .testi-card p { font-style: italic; color: #ccc; margin-bottom: 15px; }
-        .testi-card span { color: var(--accent); font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
+        /* TÉMOIGNAGES */
+        .testimonial { background: #0a0a0a; padding: 25px; border-radius: 10px; border-left: 4px solid var(--accent); margin-bottom: 20px; }
 
-        /* FOOTER */
-        footer { padding: 80px 0; text-align: center; background: #000; color: #555; font-size: 0.9rem; }
-        
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
-            .grid { grid-template-columns: 1fr; }
-        }
+        footer { padding: 60px 0; text-align: center; color: #444; font-size: 0.8rem; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="container">
-            <a href="#accueil">ACCUEIL</a>
-            <a href="#solutions">SOLUTIONS</a>
-            <a href="#temoignages">RÉFÉRENCES</a>
-            <a href="#contact">CONTACT</a>
-        </div>
+        <a href="#accueil">Accueil</a>
+        <a href="#catalogue">Nos Services</a>
+        <a href="#references">Références</a>
     </nav>
 
     <header id="accueil">
         <div class="container">
             <img src="1774378467067.jpeg" onerror="this.src='1000209895.jpg'" class="profile-img">
-            <div class="hero-tagline">EXPERTISE DIGITALE 360°</div>
-            <h1>Mitche <span style="color:var(--accent)">Digital Group</span></h1>
-            <p style="max-width: 800px; margin: auto; color: #888;">Transformation numérique pour usines et entreprises. Optimisation de stock, infrastructures e-commerce et stratégies de croissance B2B à Bouaké.</p>
+            <h1>Mitche <span style="color:var(--accent)">Digital</span></h1>
+            <p>Expertise 360° : Ingénierie logicielle & Solutions IA à Bouaké</p>
         </div>
     </header>
 
     <div class="container">
 
-        <section id="solutions">
-            <h2>Nos Solutions Stratégiques</h2>
-            <div class="grid">
+        <div class="search-container">
+            <input type="text" id="searchInput" onkeyup="filterServices()" placeholder="Rechercher un service (ex: Stock, IA, Logo, Facebook...)">
+        </div>
+
+        <section id="catalogue">
+            <h2>Catalogue des Solutions</h2>
+            <div class="grid" id="servicesGrid">
                 
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=700" class="affiche" alt="Audit Stock">
+                <div class="card service-item">
                     <div class="card-body">
-                        <h3>Gestion de Stock & Flux</h3>
-                        <p>Logiciel sur-mesure pour industries. Suivi des stocks en temps réel, alertes automatiques et rapports de performance pour éliminer les pertes en entrepôt.</p>
-                        <div class="price-badge">Audit technique : Sur Devis</div>
-                        <a href="https://wa.me/2250150882462?text=Bonjour+Monsieur+Kouakou,+je+suis+chef+d'entreprise+et+je+souhaite+une+démonstration+de+votre+solution+de+Gestion+de+Stock+pour+mon+usine." class="btn-order">Demander une démo</a>
+                        <h3>Gestion de Stock & Usines</h3>
+                        <p>Optimisation logistique, inventaire temps réel et flux industriels.</p>
+                        <a href="https://wa.me/2250150882462?text=Bonjour+Mitché,+je+souhaite+une+étude+pour+mon+usine." class="btn-order">Étude Technique</a>
                     </div>
                 </div>
 
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700" class="affiche" alt="Architecture Web">
+                <div class="card service-item">
                     <div class="card-body">
-                        <h3>Écosystème E-commerce</h3>
-                        <p>Développement de plateformes de vente complexes. Intégration complète de paiements Mobile Money et système logistique pour une boutique automatisée.</p>
-                        <div class="price-badge">Dès 85.000 FCFA</div>
-                        <a href="https://wa.me/2250150882462?text=Bonjour+Mitché+Digital,+je+souhaite+un+devis+professionnel+pour+la+création+d'un+écosystème+e-commerce+complet." class="btn-order">Obtenir un devis</a>
+                        <h3>Architecture E-commerce</h3>
+                        <p>Plateformes de vente complexes avec paiements locaux intégrés.</p>
+                        <a href="https://wa.me/2250150882462?text=Bonjour+Mitché,+je+souhaite+un+devis+e-commerce." class="btn-order">Obtenir Devis</a>
                     </div>
                 </div>
 
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=700" class="affiche" alt="Marketing Digital">
+                <div class="card service-item">
+                    <div class="card-body" style="border: 1px solid var(--accent); border-radius: 8px;">
+                        <h3>Prompt Engineering & IA</h3>
+                        <p>Automatisation de processus par intelligence artificielle et rédaction de prompts.</p>
+                        <a href="https://wa.me/2250150882462?text=Bonjour+Mitché,+je+souhaite+intégrer+l'IA+dans+mon+entreprise." class="btn-order">Expertise IA</a>
+                    </div>
+                </div>
+
+                <div class="card service-item">
                     <div class="card-body">
-                        <h3>Publicité Ads Haute Précision</h3>
-                        <p>Campagnes publicitaires ciblées sur Facebook, Instagram et TikTok. Nous utilisons l'IA pour cibler vos futurs clients et maximiser votre ROI.</p>
-                        <div class="price-badge">Dès 20.000 FCFA</div>
-                        <a href="https://wa.me/2250150882462?text=Bonjour+Mitché+Digital,+je+souhaite+lancer+une+campagne+publicitaire+stratégique+pour+booster+mes+ventes." class="btn-order">Lancer la campagne</a>
+                        <h3>Publicité Facebook & TikTok</h3>
+                        <p>Campagnes Ads ciblées pour augmenter votre chiffre d'affaires.</p>
+                        <a href="https://wa.me/2250150882462?text=Boost+Ads" class="btn-order">Lancer Pub</a>
+                    </div>
+                </div>
+
+                <div class="card service-item">
+                    <div class="card-body">
+                        <h3>Design Logo & Identité</h3>
+                        <p>Création de logos professionnels et charte graphique pour entreprises.</p>
+                        <a href="https://wa.me/2250150882462?text=Design+Logo" class="btn-order">Commander</a>
+                    </div>
+                </div>
+
+                <div class="card service-item">
+                    <div class="card-body">
+                        <h3>Montage Vidéo TikTok/Reels</h3>
+                        <p>Montages dynamiques pour réseaux sociaux avec effets pro.</p>
+                        <a href="https://wa.me/2250150882462?text=Montage+Video" class="btn-order">Commander</a>
+                    </div>
+                </div>
+
+                <div class="card service-item">
+                    <div class="card-body">
+                        <h3>Guide : Vendre sur Facebook</h3>
+                        <p>Guide complet pour dominer le marché ivoirien (PDF).</p>
+                        <a href="https://wa.me/2250150882462?text=Achat+Guide+Facebook" class="btn-order">Acheter PDF</a>
+                    </div>
+                </div>
+
+                <div class="card service-item">
+                    <div class="card-body">
+                        <h3>Guide : Secrets de l'IA</h3>
+                        <p>Maîtrisez les outils IA pour booster votre productivité (PDF).</p>
+                        <a href="https://wa.me/2250150882462?text=Achat+Guide+IA" class="btn-order">Acheter PDF</a>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <section id="temoignages">
-            <h2>Confiance & Références</h2>
-            <div class="testi-grid">
-                <div class="testi-card">
-                    <p>"Grâce à Mitche Digital, notre gestion de stock est devenue infaillible. Le gain de productivité est impressionnant."</p>
-                    <span>— Directeur de Production, Usine Agro-Indus</span>
-                </div>
-                <div class="testi-card">
-                    <p>"Leur approche 360° nous a permis de centraliser tout notre marketing et nos ventes en ligne avec succès."</p>
-                    <span>— Gérante de Cabinet, Bouaké</span>
-                </div>
-                <div class="testi-card">
-                    <p>"Professionnalisme et réactivité technique. Mitche Digital est le partenaire qu'il nous fallait."</p>
-                    <span>— Responsable Logistique</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" style="text-align: center;">
-            <div style="background: #111; padding: 50px; border-radius: 20px; border: 1px solid var(--accent);">
-                <h2>Prêt à transformer votre business ?</h2>
-                <p>Contactez-nous pour un diagnostic gratuit de votre infrastructure numérique.</p>
-                <p style="font-size: 1.5rem; font-weight: bold; margin: 20px 0;">+225 01 50 88 24 62</p>
-                <a href="https://wa.me/2250150882462" class="btn-order" style="background:#25D366; color:#fff; display:inline-block; padding: 15px 50px;">Discuter sur WhatsApp</a>
+        <section id="references">
+            <h2>Références Clients</h2>
+            <div class="testimonial">
+                <p>"Mitche Digital est devenu notre partenaire technique pour toute notre logistique."</p>
+                <small style="color:var(--accent)">— Dirigeant Industriel, Bouaké</small>
             </div>
         </section>
 
     </div>
 
     <footer>
-        <p><strong>MITCHE DIGITAL GROUP</strong><br>
-        Bouaké, Côte d'Ivoire | Consulting & Ingénierie Numérique<br><br>
-        &copy; 2026 Tous droits réservés.</p>
+        <p><strong>MITCHE DIGITAL BUSINESS</strong><br>Bouaké, Côte d'Ivoire | +225 01 50 88 24 62</p>
     </footer>
+
+    <script>
+        function filterServices() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let items = document.getElementsByClassName('service-item');
+            
+            for (let i = 0; i < items.length; i++) {
+                let content = items[i].innerText.toLowerCase();
+                if (content.includes(input)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
+
+
