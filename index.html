@@ -3,97 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitche Digital | Agence Digitale 360°</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Mitche Digital - Agence de solutions numériques à Bouaké. Boostage réseaux sociaux, création de sites web et guides PDF.">
+    <title>Mitche Digital | Solutions Numériques 360°</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0a0a0a; --accent: #c8f06e; --text: #ffffff; --card-bg: #161616; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+        :root { --bg: #0a0a0a; --accent: #c8f06e; --text: #ffffff; --card-bg: #1a1a1a; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 0; line-height: 1.6; scroll-behavior: smooth; }
         .container { width: 95%; max-width: 1200px; margin: auto; padding: 20px; }
-        header { text-align: center; padding: 40px 0; border-bottom: 1px solid #222; }
-        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 15px; }
-        .btn-whatsapp { display: inline-block; background: var(--accent); color: #000; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 10px 0; font-size: 0.9rem; }
-        .section-title { margin-top: 50px; font-size: 1.8rem; border-left: 5px solid var(--accent); padding-left: 15px; color: var(--accent); text-transform: uppercase; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 25px; }
-        .card { background: var(--card-bg); border-radius: 12px; padding: 20px; border: 1px solid #2a2a2a; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(200, 240, 110, 0.1); }
-        .card h3 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--accent); }
-        .card p { font-size: 0.85rem; color: #ccc; margin-bottom: 15px; }
-        .price { font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; display: block; }
-        .buy-btn { display: block; background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 8px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.8rem; text-align: center; }
-        .buy-btn:hover { background: var(--accent); color: #000; }
-        footer { text-align: center; padding: 50px 0; color: #666; font-size: 0.8rem; border-top: 1px solid #222; margin-top: 50px; }
+        
+        /* HEADER & AVATAR */
+        header { text-align: center; padding: 80px 0 40px; border-bottom: 1px solid #333; }
+        .profile-img { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--accent); object-fit: cover; margin-bottom: 20px; transition: var(--transition); }
+        .profile-img:hover { transform: rotate(5deg) scale(1.1); box-shadow: 0 0 30px rgba(200, 240, 110, 0.4); }
+
+        /* BOUTONS UNIFIÉS */
+        .btn-common { transition: var(--transition); display: inline-block; cursor: pointer; text-decoration: none; font-weight: bold; text-align: center; border-radius: 50px; }
+        .btn-common:hover { transform: translateY(-3px) scale(1.03); filter: brightness(1.1); }
+        .btn-whatsapp { background: var(--accent); color: #000; padding: 15px 35px; margin: 20px 0; }
+
+        /* GRILLE & CARTES */
+        .section-title { margin-top: 60px; font-size: 2.2rem; color: var(--accent); text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid #333; transition: var(--transition); display: flex; flex-direction: column; }
+        .card:hover { border-color: var(--accent); box-shadow: 0 15px 35px rgba(0,0,0,0.7); }
+        .product-img { width: 100%; height: 200px; object-fit: cover; background: #222; transition: 0.5s; }
+        .card:hover .product-img { transform: scale(1.05); }
+        .card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        /* TÉMOIGNAGES INTERACTIFS */
+        .testimonials { background: #111; padding: 60px 20px; border-radius: 30px; margin-top: 60px; text-align: center; }
+        blockquote { background: #1a1a1a; padding: 25px; border-radius: 15px; border-left: 5px solid var(--accent); margin: 20px auto; font-style: italic; max-width: 800px; text-align: left; transition: var(--transition); border: 1px solid transparent; }
+        blockquote:hover { border-color: var(--accent); background: #222; transform: translateX(10px); }
+
+        /* CTA SECTION */
+        .cta { text-align: center; padding: 100px 20px; background: radial-gradient(circle at center, rgba(200, 240, 110, 0.05) 0%, transparent 70%); margin-top: 40px; }
+        .cta-btn { background: var(--accent); color: #000; padding: 20px 50px; border-radius: 12px; font-size: 1.2rem; }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 80px 0; color: #888; border-top: 1px solid #333; margin-top: 60px; }
+        .social-links a { color: var(--accent); text-decoration: none; margin: 0 15px; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
+    <header>
+        <img src="1000209895.jpg" 
+             onerror="this.src='1000209890.jpg'" 
+             class="profile-img" 
+             alt="Photo de profil de Mitché Kouakou, fondateur de Mitche Digital">
+        <h1>Bienvenue chez <span style="color:var(--accent)">Mitche Digital</span></h1>
+        <p>Expert en Transformation Numérique & Croissance Business à Bouaké</p>
+        <a href="https://wa.me/2250150882462" class="btn-common btn-whatsapp" aria-label="Contacter Mitche Digital sur WhatsApp">Discuter sur WhatsApp</a>
+    </header>
+
     <div class="container">
-        <header>
-            <img src="1000209895.jpg" class="profile-img" alt="Mitche Digital">
-            <h1>Mitche <span style="color:var(--accent)">Digital</span></h1>
-            <p>Expert en Solutions Numériques & Croissance Business</p>
-            <a href="https://wa.me/2250150882462" class="btn-whatsapp">Contact Direct : 01 50 88 24 62</a>
-        </header>
-
-        <section>
-            <h2 class="section-title">💻 Web & Applications</h2>
+        <section id="boutique">
+            <h2 class="section-title">Nos Solutions Digitales</h2>
             <div class="grid">
-                <div class="card"><h3>Site Vitrine Pro</h3><p>Présentez votre entreprise avec élégance.</p><span class="price">Dès 50.000 F</span><a href="https://wa.me/2250150882462?text=Site%20Vitrine" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Boutique E-commerce</h3><p>Vendez vos produits en ligne 24h/24.</p><span class="price">Dès 85.000 F</span><a href="https://wa.me/2250150882462?text=E-commerce" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Application Mobile (Android/iOS)</h3><p>Votre business dans la poche de vos clients.</p><span class="price">Sur Devis</span><a href="https://wa.me/2250150882462?text=App%20Mobile" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Landing Page</h3><p>Page unique optimisée pour la conversion.</p><span class="price">25.000 F</span><a href="https://wa.me/2250150882462?text=Landing%20Page" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Gestion de Stock</h3><p>Logiciel sur mesure pour vos boutiques.</p><span class="price">Sur Devis</span><a href="https://wa.me/2250150882462?text=Logiciel%20Stock" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Maintenance Web</h3><p>Mise à jour et sécurité de votre site.</p><span class="price">10.000 F/mois</span><a href="https://wa.me/2250150882462?text=Maintenance" class="buy-btn">Commander</a></div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500" alt="Affiche Guide Vendre sur Facebook" class="product-img">
+                    <div class="card-content">
+                        <h3>Vendre sur Facebook</h3>
+                        <p>Le guide ultime pour générer des revenus sans stock en Afrique.</p>
+                        <span style="font-size:1.6rem; font-weight:bold; color:var(--accent);">5.000 FCFA</span>
+                        <a href="https://wa.me/2250150882462?text=Je+souhaite+le+guide+Facebook" class="btn-common btn-whatsapp" style="margin-top:15px; border-radius:8px;">Acheter le Guide</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=500" alt="Affiche Guide Secrets de l'IA" class="product-img">
+                    <div class="card-content">
+                        <h3>Secrets de l'IA</h3>
+                        <p>Maîtrisez ChatGPT et Midjourney pour automatiser votre business.</p>
+                        <span style="font-size:1.6rem; font-weight:bold; color:var(--accent);">3.500 FCFA</span>
+                        <a href="https://wa.me/2250150882462?text=Je+souhaite+le+guide+IA" class="btn-common btn-whatsapp" style="margin-top:15px; border-radius:8px;">Acheter le Guide</a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section>
-            <h2 class="section-title">🚀 Marketing & Visibilité</h2>
-            <div class="grid">
-                <div class="card"><h3>Boost TikTok</h3><p>Abonnés, vues et likes réels.</p><span class="price">5.000 F</span><a href="https://wa.me/2250150882462?text=Boost%20TikTok" class="buy-btn">Booster</a></div>
-                <div class="card"><h3>Boost Instagram</h3><p>Augmentez votre influence rapidement.</p><span class="price">5.000 F</span><a href="https://wa.me/2250150882462?text=Boost%20Insta" class="buy-btn">Booster</a></div>
-                <div class="card"><h3>Boost Page Facebook</h3><p>Likes et abonnés pour votre business.</p><span class="price">5.000 F</span><a href="https://wa.me/2250150882462?text=Boost%20FB" class="buy-btn">Booster</a></div>
-                <div class="card"><h3>Publicité Facebook Ads</h3><p>Campagne ciblée pour vendre vos stocks.</p><span class="price">20.000 F</span><a href="https://wa.me/2250150882462?text=Pub%20Ads" class="buy-btn">Lancer</a></div>
-                <div class="card"><h3>Gestion Réseaux Sociaux</h3><p>Nous publions pour vous chaque jour.</p><span class="price">30.000 F/mois</span><a href="https://wa.me/2250150882462?text=Community%20Management" class="buy-btn">S'abonner</a></div>
-                <div class="card"><h3>Stratégie de Vente</h3><p>Audit et plan pour doubler votre CA.</p><span class="price">15.000 F</span><a href="https://wa.me/2250150882462?text=Strategie" class="buy-btn">Commander</a></div>
-            </div>
+        <section class="testimonials">
+            <h2>Ce que disent nos clients</h2>
+            <blockquote>
+                <p>"Le boost TikTok a propulsé ma visibilité en 48h. Service sérieux et rapide !" - <strong>Aissatou</strong></p>
+            </blockquote>
+            <blockquote>
+                <p>"Grâce aux conseils de Mitche, j'utilise l'IA pour créer mes affiches de pub. Gain de temps énorme !" - <strong>Idriss</strong></p>
+            </blockquote>
         </section>
 
-        <section>
-            <h2 class="section-title">🎨 Design & Vidéo</h2>
-            <div class="grid">
-                <div class="card"><h3>Logo Professionnel</h3><p>Design unique et mémorable.</p><span class="price">15.000 F</span><a href="https://wa.me/2250150882462?text=Design%20Logo" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Montage Vidéo TikTok/Reels</h3><p>Édition dynamique avec sous-titres.</p><span class="price">5.000 F / Vidéo</span><a href="https://wa.me/2250150882462?text=Montage%20Video" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Affiche Publicitaire</h3><p>Visuel pour vos promos sur WhatsApp.</p><span class="price">5.000 F</span><a href="https://wa.me/2250150882462?text=Affiche" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Carte de Visite Digitale</h3><p>Lien interactif pour vos contacts.</p><span class="price">7.500 F</span><a href="https://wa.me/2250150882462?text=Carte%20Digitale" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Identité Visuelle Complète</h3><p>Logo + Couleurs + Polices + Affiches.</p><span class="price">40.000 F</span><a href="https://wa.me/2250150882462?text=Identite%20Visuelle" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Vignettes YouTube</h3><p>Boostez votre taux de clic (CTR).</p><span class="price">3.000 F</span><a href="https://wa.me/2250150882462?text=Vignette" class="buy-btn">Commander</a></div>
-            </div>
+        <section class="cta">
+            <h2>Prêt à passer au niveau supérieur ?</h2>
+            <p>Rejoignez les entrepreneurs qui réussissent avec Mitche Digital.</p><br>
+            <a href="#boutique" class="btn-common cta-btn">Voir nos offres</a>
         </section>
+    </div>
 
-        <section>
-            <h2 class="section-title">📚 Bibliothèque de Succès (PDF)</h2>
-            <div class="grid">
-                <div class="card"><h3>Vendre sur Facebook</h3><p>Secrets du e-commerce en Afrique.</p><span class="price">5.000 F</span><a href="https://wa.me/2250150882462?text=PDF%20Vendre%20FB" class="buy-btn">Acheter</a></div>
-                <div class="card"><h3>Maîtrise de l'IA</h3><p>Devenez un pro du prompt engineering.</p><span class="price">3.500 F</span><a href="https://wa.me/2250150882462?text=PDF%20IA" class="buy-btn">Acheter</a></div>
-                <div class="card"><h3>Gagner avec TikTok</h3><p>Guide pour monétiser votre compte.</p><span class="price">4.000 F</span><a href="https://wa.me/2250150882462?text=PDF%20TikTok" class="buy-btn">Acheter</a></div>
-                <div class="card"><h3>Freelancing 2.0</h3><p>Vendre ses services sur le web.</p><span class="price">5.000 F</span><a href="https://wa.me/2250150882462?text=PDF%20Freelance" class="buy-btn">Acheter</a></div>
-                <div class="card"><h3>Canva Pro Mastery</h3><p>Créez des designs pro sans être graphiste.</p><span class="price">3.000 F</span><a href="https://wa.me/2250150882462?text=PDF%20Canva" class="buy-btn">Acheter</a></div>
-                <div class="card"><h3>Publicité WhatsApp</h3><p>Utilisez vos statuts pour vendre.</p><span class="price">2.500 F</span><a href="https://wa.me/2250150882462?text=PDF%20WhatsApp" class="buy-btn">Acheter</a></div>
-            </div>
-        </section>
+    <footer>
+        <p><strong>Mitche Digital Business</strong><br>
+        Bouaké, Côte d'Ivoire | International<br>
+        Contact : +225 01 50 88 24 62</p>
+        <div class="social-links">
+            <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">TikTok</a>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 20px;">&copy; 2026 Tous droits réservés.</p>
+    </footer>
 
-        <section>
-            <h2 class="section-title">🌟 Services Spéciaux</h2>
-            <div class="grid">
-                <div class="card"><h3>Rédaction de CV Pro</h3><p>Optimisé pour décrocher un emploi.</p><span class="price">5.000 F</span><a href="https://wa.me/2250150882462?text=CV%20Pro" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Traduction de Documents</h3><p>Anglais vers Français / Français vers Anglais.</p><span class="price">2.000 F / Page</span><a href="https://wa.me/2250150882462?text=Traduction" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Coaching Privé (1h)</h3><p>Session zoom sur votre projet digital.</p><span class="price">10.000 F</span><a href="https://wa.me/2250150882462?text=Coaching" class="buy-btn">Réserver</a></div>
-                <div class="card"><h3>Audit de Sécurité</h3><p>Vérifiez si vos comptes sont protégés.</p><span class="price">5.000 F</span><a href="https://wa.me/2250150882462?text=Securite" class="buy-btn">Réserver</a></div>
-                <div class="card"><h3>Sponsoring Influenceur</h3><p>Mise en relation avec des influenceurs.</p><span class="price">Sur Devis</span><a href="https://wa.me/2250150882462?text=Sponsoring" class="buy-btn">Commander</a></div>
-                <div class="card"><h3>Assistance Virtuelle</h3><p>Gestion d'emails et agenda à distance.</p><span class="price">Mensuel</span><a href="https://wa.me/2250150882462?text=Assistance" class="buy-btn">Se renseigner</a></div>
-            </div>
-        </section>
-
-        <footer>
-            &copy; 2026 Mitche Digital Business - Bouaké, Côte d'Ivoire.
-        </footer>
+</body>
+</html>
