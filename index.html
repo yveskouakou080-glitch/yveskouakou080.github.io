@@ -1,68 +1,106 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitche Digital 360 | L'Élite Technologique à Bouaké</title>
     
-    <meta name="description" content="Mitche Digital 360 : Agence d'IA, Logiciels de Stock et Stratégie Digitale à Bouaké. Expert Mitché Kouakou.">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <title>Mitche Digital 360 | L'Élite IA & Solutions Business à Bouaké</title>
+    <meta name="description" content="Expertise en Intelligence Artificielle, Gestion de Stock industrielle, Branding de Luxe 8K et Marketing Digital Haute Performance à Bouaké, Côte d'Ivoire. Dirigé par Mitché Kouakou.">
+    <meta name="keywords" content="Mitche Digital 360, Agence Digitale Bouaké, IA Côte d'Ivoire, Prompt Engineering, Gestion de Stock, Branding Luxe 8K, Marketing Digital, Mitché Kouakou">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        :root { --accent: #c8f06e; --bg: #030303; --card: #0d0d0d; --glass: rgba(255, 255, 255, 0.03); --border: rgba(200, 240, 110, 0.2); }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --accent: #c8f06e; --bg: #050505; --card: #111; --border: rgba(200, 240, 110, 0.2); }
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
         body { background-color: var(--bg); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
         .container { width: 90%; max-width: 1200px; margin: auto; }
 
-        /* NAVIGATION */
+        /* NAVIGATION FLUIDE */
         nav { background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); }
         .nav-flex { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; text-transform: uppercase; }
-        .nav-links a { color: #888; text-decoration: none; margin-left: 25px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
+        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; text-transform: uppercase; color: #fff; text-decoration: none; }
+        .nav-links a { color: #888; text-decoration: none; margin-left: 25px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* HERO SECTION */
-        header { padding: 200px 0 80px; text-align: center; background: radial-gradient(circle at 50% -20%, #1a2a0a 0%, #030303 60%); }
-        .profile-img { width: 160px; height: 160px; border-radius: 40px; transform: rotate(-3deg); border: 2px solid var(--accent); object-fit: cover; margin-bottom: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        /* HEADER EDITORIAL */
+        header { padding: 180px 0 80px; text-align: center; background: radial-gradient(circle at 50% -20%, #1a2a0a 0%, #030303 60%); }
+        .profile-img { 
+            width: 180px; height: 180px; border-radius: 40px; 
+            border: 2px solid var(--accent); object-fit: cover; 
+            margin-bottom: 30px; transform: rotate(-3deg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            transition: 0.5s;
+        }
+        .profile-img:hover { transform: rotate(0deg) scale(1.05); }
         h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; letter-spacing: -3px; line-height: 0.9; margin-bottom: 20px; }
-        .hero-tag { background: var(--accent); color: #000; padding: 6px 18px; border-radius: 50px; font-weight: 800; font-size: 0.7rem; text-transform: uppercase; display: inline-block; margin-bottom: 20px; }
+        .accent-text { color: var(--accent); }
 
-        /* SECTION À PROPOS */
-        #about { padding: 100px 0; border-bottom: 1px solid var(--border); background: #050505; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .about-text h2 { font-size: 2.5rem; margin-bottom: 25px; color: var(--accent); }
-        .about-text p { color: #aaa; font-size: 1.1rem; margin-bottom: 20px; }
+        /* NOTIFICATION TOAST */
+        .notification { 
+            position: fixed; top: 20px; right: 20px; z-index: 3000;
+            background: var(--accent); color: #000; padding: 15px 25px; 
+            border-radius: 12px; font-weight: 700; transform: translateX(150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(200, 240, 110, 0.3);
+        }
+        .notification.show { transform: translateX(0); }
 
-        /* RECHERCHE */
-        .search-area { padding: 50px 0; position: sticky; top: 70px; z-index: 900; background: var(--bg); }
-        #searchInput { width: 100%; background: var(--glass); border: 1px solid var(--border); padding: 22px 35px; border-radius: 25px; color: #fff; font-size: 1rem; outline: none; transition: 0.3s; }
+        /* RECHERCHE DESIGN */
+        .search-area { padding: 50px 0; position: sticky; top: 70px; z-index: 900; background: var(--bg); text-align: center; }
+        #searchInput { 
+            width: 100%; max-width: 600px; background: rgba(255,255,255,0.03); 
+            border: 1px solid var(--border); padding: 22px 35px; border-radius: 25px; 
+            color: #fff; font-size: 1rem; backdrop-filter: blur(10px); transition: 0.3s;
+        }
         #searchInput:focus { border-color: var(--accent); box-shadow: 0 0 30px rgba(200, 240, 110, 0.1); }
 
-        /* GRILLE DE SERVICES */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding-bottom: 100px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 35px; transition: 0.4s; cursor: pointer; position: relative; }
-        .card:hover { border-color: var(--accent); transform: translateY(-10px); background: #111; }
-        .card h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--accent); }
-        .card p { color: #777; font-size: 0.85rem; }
+        /* GRILLE DE SOLUTIONS */
+        .section-title { margin: 60px 0 30px; font-size: 2.5rem; font-weight: 800; text-align: center; letter-spacing: -2px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; padding-bottom: 120px; }
+        .card { 
+            background: var(--card); border-radius: 28px; overflow: hidden; 
+            border: 1px solid var(--border); transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); cursor: pointer;
+            height: 400px; position: relative;
+        }
+        .card:hover { border-color: var(--accent); transform: translateY(-15px) scale(1.02); background: #1a1a1a; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); filter: grayscale(50%); }
+        .card:hover .card-img { transform: scale(1.15); filter: grayscale(0%); }
+        .card-overlay { 
+            position: absolute; bottom: 0; left: 0; width: 100%; 
+            padding: 40px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); 
+            opacity: 0; transition: 0.4s;
+        }
+        .card:hover .card-overlay { opacity: 1; }
+        .card h3 { font-size: 1.8rem; color: #fff; margin-bottom: 5px; }
+        .card p { font-size: 0.9rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* MODAL (FENÊTRE PRO) */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); }
-        .modal-content { background: #0a0a0a; margin: 10% auto; padding: 50px; border: 1px solid var(--accent); width: 90%; max-width: 550px; border-radius: 35px; text-align: center; animation: modalIn 0.4s ease; }
-        @keyframes modalIn { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        .btn-wa { background: var(--accent); color: #000; padding: 18px 40px; border-radius: 15px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 30px; text-transform: uppercase; }
+        /* BOUTON ET MODAL ELITE */
+        .btn { 
+            background: var(--accent); color: #000; padding: 20px 40px; 
+            border: none; border-radius: 15px; font-weight: 800; cursor: pointer; 
+            text-transform: uppercase; letter-spacing: 2px; margin-top: 30px; font-size: 0.9rem; transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(200, 240, 110, 0.3); }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(20px); z-index: 2000; }
+        .modal-content { background: #000; margin: 8% auto; padding: 60px; border-radius: 40px; width: 90%; max-width: 550px; border: 1px solid var(--accent); text-align: center; animation: zoomIn 0.4s ease-out; }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        footer { padding: 80px 0; border-top: 1px solid var(--border); text-align: center; color: #444; font-size: 0.8rem; }
+        footer { padding: 100px 0; text-align: center; color: #444; border-top: 1px solid #111; font-size: 0.85rem; }
+
+        @media (max-width: 900px) { h1 { font-size: 3rem; } .card { height: 350px; } .modal-content { padding: 40px; } }
     </style>
 </head>
 <body>
 
+    <div id="toast" class="notification">Action enregistrée !</div>
+
     <nav>
         <div class="container nav-flex">
-            <div class="logo">MITCHE DIGITAL <span style="color:var(--accent)">360</span></div>
+            <a href="#accueil" class="logo">Mitche Digital <span class="accent-text">360</span></a>
             <div class="nav-links">
-                <a href="#about">L'Agence</a>
-                <a href="#catalogue">Nos Solutions</a>
+                <a href="#accueil">Accueil</a>
+                <a href="#catalogue">Solutions</a>
                 <a href="https://wa.me/2250150882462">Direct WhatsApp</a>
             </div>
         </div>
@@ -70,86 +108,110 @@
 
     <header id="accueil">
         <div class="container">
-            <img src="1000210136.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-img">
-            <br><div class="hero-tag">Elite Digital Agency</div>
-            <h1>The New Era of <br><span style="color:var(--accent)">Intelligence.</span></h1>
-            <p style="color:#666; margin-top:20px; font-size:1.1rem;">Expertise IA & Architecture Logicielle • Bouaké, CI.</p>
+            <img src="image_1.png" alt="Mitché Kouakou, Fondateur Visionnaire de Mitche Digital 360 à Bouaké" class="profile-img">
+            <br>
+            <span style="color: var(--accent); font-weight: 800; font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; display: inline-block; margin-bottom: 20px;">L'Élite de l'IA</span>
+            <h1>Intelligence <br><span class="accent-text">Transformée.</span></h1>
+            <p style="color: #666; margin-top: 25px; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Architecture logicielle et ingénierie de prompts pour les leaders de demain • Basé à Bouaké.</p>
         </div>
     </header>
 
-    <section id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-text">
-                    <h2>À Propos.</h2>
-                    <p>Sous la direction de <strong>Mitché Kouakou</strong>, Mitche Digital 360 fusionne l'Intelligence Artificielle et le développement sur-mesure pour propulser les entreprises de Côte d'Ivoire.</p>
-                    <p>De la gestion de stock industrielle à l'ingénierie de prompts haute performance, nous créons le futur de votre business.</p>
-                </div>
-                <div style="background:var(--glass); padding:40px; border-radius:30px; border:1px solid var(--border); text-align:center;">
-                    <div style="font-size:3.5rem; font-weight:800; color:var(--accent);">360°</div>
-                    <p style="text-transform:uppercase; letter-spacing:2px; font-size:0.7rem;">Vision Technologique Totale</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <div class="container">
         <div class="search-area">
-            <input type="text" id="searchInput" onkeyup="filterServices()" placeholder="Rechercher une solution d'élite...">
+            <input type="text" id="searchInput" onkeyup="filterServices()" placeholder="Rechercher une solution d'élite (ex: IA, Stock, Design, Ads...)" aria-label="Rechercher un service">
         </div>
 
-        <section id="catalogue">
-            <div class="grid" id="servicesGrid">
-                
-                <div class="card service-item" onclick="openModal('Ingénierie IA', 'Nous concevons des prompts et des systèmes automatisés pour décupler votre productivité avec ChatGPT et Claude.', 'https://wa.me/2250150882462?text=Bonjour+Mitché,+besoin+d+expertise+IA')">
-                    <h3>Prompt Engineering</h3>
-                    <p>L'intelligence au service de vos revenus.</p>
+        <h2 class="section-title">Catalogue <span class="accent-text">360°</span></h2>
+        <section class="grid portfolio-grid" id="catalogue">
+            
+            <div class="card service-item" onclick="openModal('Prompt Engineering', 'Je conçois des prompts complexes pour automatiser vos ventes et votre contenu. Gagnez 10h par semaine avec l\'IA experte.', 'https://wa.me/2250150882462?text=Je+souhaite+une+expertise+Prompt+Engineering')">
+                <img src="https://via.placeholder.com/400x600/050505/c8f06e?text=Prompt+Engineering+IA" alt="Génération IA 8K Prompt Engineering" class="card-img">
+                <div class="card-overlay">
+                    <h3>Prompt Design</h3>
+                    <p>Intelligence Artificielle</p>
                 </div>
+            </div>
 
-                <div class="card service-item" onclick="openModal('Gestion de Stock', 'Logiciels industriels personnalisés pour usines et commerces à Bouaké. Inventaire temps réel.', 'https://wa.me/2250150882462?text=Bonjour+Mitché,+besoin+du+logiciel+de+stock')">
-                    <h3>Smart Stock Pro</h3>
-                    <p>Maîtrisez votre logistique de A à Z.</p>
+            <div class="card service-item" onclick="openModal('Smart Stock Pro', 'Logiciel sur-mesure pour usines et commerces ivoiriens. Suivi de stock temps réel, alertes et rapports automatisés.', 'https://wa.me/2250150882462?text=Je+souhaite+un+devis+pour+Smart+Stock+Pro')">
+                <img src="https://via.placeholder.com/400x600/050505/c8f06e?text=Logiciel+Stock+Industriel" alt="Logiciel de gestion de stock Smart Stock" class="card-img">
+                <div class="card-overlay">
+                    <h3>Smart Stock</h3>
+                    <p>Software Engineering</p>
                 </div>
+            </div>
 
-                <div class="card service-item" onclick="openModal('E-commerce Elite', 'Boutiques en ligne haut de gamme avec intégration Mobile Money et livraison.', 'https://wa.me/2250150882462?text=Bonjour+Mitché,+besoin+d+un+site+ecommerce')">
-                    <h3>Vente en Ligne</h3>
-                    <p>Votre magasin ouvert 24h/24 dans le monde entier.</p>
+            <div class="card service-item" onclick="openModal('Visuals 8K Masterpiece', 'Portraits IA 8K et branding cinématique type GQ. Visuels de luxe en 24h, sans photographe.', 'https://wa.me/2250150882462?text=Je+souhaite+un+portrait+IA+8K')">
+                <img src="https://via.placeholder.com/400x600/050505/c8f06e?text=Galerie+Masterpiece+8K" alt="Portrait photo IA 8K Ultra-Réaliste" class="card-img">
+                <div class="card-overlay">
+                    <h3>Visuals 8K</h3>
+                    <p>Luxury Branding</p>
                 </div>
+            </div>
 
+            <div class="card service-item" onclick="openModal('Smart Chat Kwat-to', 'Contactez-nous directement pour lancer votre projet en 24h. Discussion fluide et devis rapide.', 'https://wa.me/2250150882462?text=Je+souhaite+lancer+un+projet+maintenant')">
+                <img src="image_4.png" alt="Contact direct via chat bubble Kwat-to" class="card-img">
+                <div class="card-overlay">
+                    <h3>Smart Chat</h3>
+                    <p>Contact Direct Kwat-to</p>
                 </div>
+            </div>
+
         </section>
     </div>
 
-    <div id="serviceModal" class="modal">
+    <div id="myModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
         <div class="modal-content">
-            <h3 id="modalTitle" style="color:var(--accent); font-size:2rem; margin-bottom:20px;">Service</h3>
-            <p id="modalDesc" style="color:#aaa; font-size:1.1rem; margin-bottom:30px;">Description.</p>
-            <a href="#" id="modalLink" class="btn-wa">Lancer mon Projet</a>
-            <br><br><span onclick="closeModal()" style="cursor:pointer; color:#444; font-weight:bold; font-size:0.8rem;">FERMER LA FENÊTRE</span>
+            <h3 id="modalTitle" class="accent-text" style="font-size: 2.2rem; margin-bottom: 20px;">Détails du Service</h3>
+            <p id="modalDesc" style="margin: 20px 0; color: #aaa; font-size: 1.1rem; line-height: 1.8;"></p>
+            <a href="#" id="modalLink" style="text-decoration: none;"><button class="btn">Lancer mon Projet sur WhatsApp</button></a>
+            <br><br><span onclick="closeModal()" style="cursor:pointer; color:#444; font-weight:800; font-size:0.75rem; text-transform:uppercase; letter-spacing:2px;">RETOUR AU CATALOGUE</span>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 MITCHE DIGITAL 360 • BOUAKÉ • CÔTE D'IVOIRE</p>
+        <p>&copy; 2026 MITCHE DIGITAL 360 • BOUAKÉ • CÔTE D'IVOIRE • +225 01 50 88 24 62<br>Tous droits réservés. L'Élite technologique du Gbêkê.</p>
     </footer>
 
     <script>
+        // FILTRE DE RECHERCHE DYNAMIQUE
         function filterServices() {
             let input = document.getElementById('searchInput').value.toLowerCase();
-            let items = document.getElementsByClassName('service-item');
-            for (let i = 0; i < items.length; i++) {
-                let content = items[i].innerText.toLowerCase();
-                items[i].style.display = content.includes(input) ? "" : "none";
-            }
+            let items = document.querySelectorAll('.service-item');
+            items.forEach(item => {
+                let text = item.innerText.toLowerCase();
+                item.style.display = text.includes(input) ? "block" : "none";
+            });
         }
+
+        // GESTION DE LA MODAL ELITE
         function openModal(title, desc, link) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalDesc').innerText = desc;
             document.getElementById('modalLink').href = link;
-            document.getElementById('serviceModal').style.display = "block";
+            document.getElementById('myModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Empêche le scroll derrière
+            showNotification();
         }
-        function closeModal() { document.getElementById('serviceModal').style.display = "none"; }
-        window.onclick = function(e) { if (e.target == document.getElementById('serviceModal')) closeModal(); }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Réactive le scroll
+        }
+
+        // Fermeture automatique au clic à l'extérieur
+        window.onclick = function(event) {
+            let modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // NOTIFICATION TOAST
+        function showNotification() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
     </script>
 
     <script type="text/javascript">
