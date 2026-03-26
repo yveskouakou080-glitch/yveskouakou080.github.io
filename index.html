@@ -1,152 +1,1675 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitche Digital 360 | Excellence 225</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --accent: #c8f06e; --bg: #050505; --card: #121212; --text: #ffffff; --orange: #ff6b00; --wave: #1da1f2; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mitche Digital 360 — Agence digitale d'élite à Bouaké, Côte d'Ivoire. IA, Vidéo, Growth, Formation.">
+<title>Mitche Digital 360 | Agence Élite — Bouaké CI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════ */
+:root {
+  --gold: #c9a84c;
+  --gold2: #e8cc80;
+  --gold3: #f5e6b8;
+  --glow: rgba(201,168,76,0.18);
+  --bg: #030303;
+  --bg1: #060606;
+  --bg2: #090909;
+  --card: #0e0e0e;
+  --card2: #131313;
+  --text: #f2ede4;
+  --muted: rgba(242,237,228,0.48);
+  --dim: rgba(242,237,228,0.22);
+  --border: rgba(201,168,76,0.1);
+  --border2: rgba(201,168,76,0.28);
+  --green: #25d366;
+  --orange: #e07020;
+  --blue: #1a8fd4;
+  --radius: 3px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;cursor:none;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:none;}
+input,textarea,select{font-family:inherit;}
+::selection{background:var(--gold);color:#000;}
 
-        /* HEADER & STATS */
-        header { padding: 40px 20px; text-align: center; }
-        .profile-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 15px; box-shadow: 0 0 20px rgba(200, 240, 110, 0.3); }
-        .stats-bar { display: flex; justify-content: center; gap: 30px; margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 20px; }
-        .stat-number { display: block; font-size: 1.5rem; font-weight: 800; color: var(--accent); }
-        .stat-label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.6; }
+/* ═══════════════════════════════════════════
+   LOADING SCREEN
+═══════════════════════════════════════════ */
+#loader{
+  position:fixed;inset:0;z-index:99999;
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:30px;
+  transition:opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.done{opacity:0;visibility:hidden;}
+.loader-logo{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;letter-spacing:4px;
+  color:var(--gold2);opacity:0;
+  animation:loaderFadeIn 0.8s 0.3s forwards;
+}
+.loader-logo span{color:var(--gold);}
+.loader-bar-wrap{
+  width:200px;height:1px;
+  background:rgba(255,255,255,0.06);
+  position:relative;overflow:hidden;
+  opacity:0;animation:loaderFadeIn 0.6s 0.6s forwards;
+}
+.loader-bar{
+  position:absolute;left:0;top:0;height:100%;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  width:0%;animation:loadBar 2s 0.8s ease-out forwards;
+}
+.loader-pct{
+  font-size:0.65rem;letter-spacing:4px;color:var(--muted);
+  opacity:0;animation:loaderFadeIn 0.6s 0.9s forwards;
+}
+@keyframes loaderFadeIn{to{opacity:1;}}
+@keyframes loadBar{to{width:100%;}}
 
-        /* RECHERCHE */
-        .search-container { padding: 0 20px 30px; max-width: 500px; margin: 0 auto; }
-        .search-bar { width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); background: var(--card); color: white; outline: none; transition: 0.3s; }
-        .search-bar:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(200, 240, 110, 0.2); }
+/* ═══════════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════════ */
+#cur-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+}
+#cur-ring{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--gold2);
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width 0.25s,height 0.25s,opacity 0.25s,border-color 0.25s;
+  opacity:0.5;mix-blend-mode:difference;
+}
+#cur-ring.big{width:70px;height:70px;opacity:0.25;border-color:#fff;}
+#cur-ring.click{width:20px;height:20px;opacity:0.9;}
 
-        /* GRILLE DE SERVICES */
-        .grid { padding: 20px; display: grid; gap: 15px; max-width: 500px; margin: 0 auto; padding-bottom: 100px; }
-        .window-card { background: var(--card); border-radius: 20px; padding: 25px; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); outline: none; }
-        .window-card:hover, .window-card:focus { transform: scale(1.05); border-color: var(--accent); background: rgba(200, 240, 110, 0.05); }
-        .window-card h3 { color: var(--accent); font-weight: 800; margin-bottom: 5px; }
-        .window-card p { font-size: 0.85rem; opacity: 0.6; }
+/* ═══════════════════════════════════════════
+   CANVAS PARTICLES BG
+═══════════════════════════════════════════ */
+#bgCanvas{
+  position:fixed;inset:0;
+  width:100%;height:100%;
+  z-index:0;pointer-events:none;
+  opacity:0.6;
+}
 
-        /* MODALES DYNAMIQUES */
-        .modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
-        .modal.active { display: flex; opacity: 1; }
-        .modal-content { background: var(--card); padding: 30px; border-radius: 30px; width: 90%; max-width: 420px; border: 1px solid var(--accent); text-align: center; position: relative; transform: scale(0.8); transition: 0.4s; }
-        .modal.active .modal-content { transform: scale(1); }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.8rem; cursor: pointer; color: var(--accent); border: none; background: none; }
-        
-        .modal-img { width: 100%; height: 180px; border-radius: 15px; object-fit: cover; margin-bottom: 15px; background: #1a1a1a; }
-        .price-tag { display: inline-block; background: rgba(200, 240, 110, 0.1); color: var(--accent); padding: 8px 20px; border-radius: 12px; font-weight: 800; margin-bottom: 15px; }
-        .btn-cta { display: block; background: var(--accent); color: #000; padding: 16px; border-radius: 12px; text-decoration: none; font-weight: 800; margin-top: 20px; transition: 0.3s; }
-        .btn-cta:hover { filter: brightness(1.1); transform: translateY(-2px); }
+/* ═══════════════════════════════════════════
+   NOISE OVERLAY
+═══════════════════════════════════════════ */
+#noise{
+  position:fixed;inset:0;z-index:1;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.025;
+}
 
-        /* PAIEMENT */
-        .pay-box { text-align: left; padding: 15px; border-radius: 15px; margin-bottom: 10px; color: white; }
-        footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); opacity: 0.4; font-size: 0.75rem; }
-    </style>
+/* ═══════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:24px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+#nav.scrolled{
+  padding:14px 48px;
+  background:rgba(3,3,3,0.94);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;letter-spacing:3px;
+  color:var(--gold2);
+}
+.nav-brand span{color:var(--gold);}
+.nav-menu{
+  display:flex;align-items:center;gap:36px;list-style:none;
+}
+.nav-menu a{
+  font-size:0.7rem;letter-spacing:2.5px;text-transform:uppercase;
+  font-weight:500;color:var(--muted);
+  transition:color 0.3s;position:relative;
+}
+.nav-menu a::after{
+  content:'';position:absolute;bottom:-5px;left:0;
+  width:0;height:1px;background:var(--gold);
+  transition:width 0.3s;
+}
+.nav-menu a:hover{color:var(--gold2);}
+.nav-menu a:hover::after{width:100%;}
+.nav-wa{
+  display:flex;align-items:center;gap:9px;
+  padding:10px 22px;border:1px solid var(--border2);
+  color:var(--gold2);font-size:0.68rem;letter-spacing:2px;
+  text-transform:uppercase;font-weight:700;
+  border-radius:var(--radius);transition:all 0.3s;
+}
+.nav-wa:hover{background:var(--gold);color:#000;border-color:var(--gold);box-shadow:0 0 30px var(--glow);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;border:none;background:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:1px;background:var(--gold2);transition:all 0.3s;}
+.mobile-menu{
+  display:none;position:fixed;inset:0;z-index:490;
+  background:rgba(3,3,3,0.98);backdrop-filter:blur(30px);
+  flex-direction:column;align-items:center;justify-content:center;gap:36px;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-family:'Playfair Display',serif;font-size:2rem;
+  color:var(--muted);transition:color 0.3s;
+}
+.mobile-menu a:hover{color:var(--gold2);}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+#hero{
+  position:relative;z-index:2;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:130px 30px 90px;
+  overflow:hidden;
+}
+/* Ambient glow blobs */
+.blob{
+  position:absolute;border-radius:50%;filter:blur(100px);
+  pointer-events:none;opacity:0.12;
+}
+.blob-1{width:600px;height:600px;background:var(--gold);top:-15%;left:-10%;animation:blobMove 12s ease-in-out infinite alternate;}
+.blob-2{width:400px;height:400px;background:#6b4e1a;bottom:-10%;right:-5%;animation:blobMove 16s ease-in-out infinite alternate-reverse;}
+.blob-3{width:250px;height:250px;background:var(--gold2);top:40%;left:50%;transform:translateX(-50%);animation:blobMove 9s ease-in-out infinite alternate;}
+@keyframes blobMove{0%{transform:translate(0,0);}100%{transform:translate(30px,20px);}}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--border2);border-radius:100px;
+  padding:8px 20px;margin-bottom:32px;
+  font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold2);
+  background:rgba(201,168,76,0.05);
+  opacity:0;animation:slideDown 0.9s 2.8s forwards;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.6);}50%{box-shadow:0 0 0 6px rgba(201,168,76,0);}}
+
+.hero-photo-wrap{
+  position:relative;margin-bottom:36px;
+  opacity:0;animation:fadeIn 1s 2.9s forwards;
+}
+.hero-photo-ring{
+  width:140px;height:140px;border-radius:50%;
+  border:1px solid var(--gold);padding:5px;margin:0 auto;
+  box-shadow:0 0 60px rgba(201,168,76,0.2),0 0 120px rgba(201,168,76,0.08);
+  position:relative;
+}
+.hero-photo-ring::before{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:1px dashed rgba(201,168,76,0.25);
+  animation:rotateSlow 20s linear infinite;
+}
+@keyframes rotateSlow{to{transform:rotate(360deg);}}
+.hero-photo-ring img{
+  width:100%;height:100%;border-radius:50%;object-fit:cover;
+}
+.hero-status{
+  position:absolute;bottom:6px;right:calc(50% - 70px - 10px);
+  background:var(--gold);color:#000;
+  font-size:0.55rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;
+  white-space:nowrap;
+}
+
+.hero-eyebrow{
+  font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);
+  margin-bottom:18px;
+  opacity:0;animation:slideDown 0.9s 3s forwards;
+}
+.hero-h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.2rem,8.5vw,8rem);
+  font-weight:900;line-height:0.9;
+  letter-spacing:-3px;margin-bottom:28px;
+  opacity:0;animation:slideDown 1s 3.1s forwards;
+}
+.hero-h1 .line1{display:block;}
+.hero-h1 .line2{
+  display:block;
+  font-style:italic;font-weight:400;color:transparent;
+  -webkit-text-stroke:1px var(--gold);letter-spacing:-2px;
+}
+.hero-h1 .line3{display:block;color:var(--gold2);}
+
+.hero-desc{
+  font-size:1rem;color:var(--muted);
+  max-width:500px;line-height:1.85;margin:0 auto 46px;
+  opacity:0;animation:slideDown 1s 3.25s forwards;
+}
+.hero-btns{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:slideDown 1s 3.4s forwards;
+}
+.btn-gold{
+  padding:16px 38px;
+  background:var(--gold);color:#000;
+  font-weight:700;font-size:0.72rem;letter-spacing:2.5px;text-transform:uppercase;
+  border-radius:var(--radius);border:none;
+  transition:all 0.35s;position:relative;overflow:hidden;
+}
+.btn-gold::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.25),transparent 70%);
+  transform:translateX(-100%);transition:transform 0.5s;
+}
+.btn-gold:hover::after{transform:translateX(100%);}
+.btn-gold:hover{box-shadow:0 12px 45px rgba(201,168,76,0.4);transform:translateY(-3px);}
+.btn-ghost{
+  padding:16px 38px;
+  border:1px solid var(--border2);color:var(--gold2);
+  font-weight:700;font-size:0.72rem;letter-spacing:2.5px;text-transform:uppercase;
+  border-radius:var(--radius);background:transparent;
+  transition:all 0.35s;
+}
+.btn-ghost:hover{background:rgba(201,168,76,0.07);border-color:var(--gold);transform:translateY(-3px);}
+
+/* Hero stats */
+.hero-kpis{
+  display:flex;gap:0;margin-top:70px;
+  border-top:1px solid var(--border);
+  border-left:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  opacity:0;animation:slideDown 1s 3.55s forwards;
+}
+.hero-kpi{
+  flex:1;padding:26px 30px;text-align:center;
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:rgba(201,168,76,0.02);
+  transition:background 0.3s;
+}
+.hero-kpi:hover{background:rgba(201,168,76,0.05);}
+.kpi-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;font-weight:700;color:var(--gold);
+  display:block;line-height:1;margin-bottom:6px;
+}
+.kpi-lbl{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+
+/* Scroll cue */
+.scroll-cue{
+  position:absolute;bottom:35px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:fadeIn 1s 4s forwards;
+}
+.scroll-cue-line{
+  width:1px;height:55px;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+  animation:scrollDrop 2.2s ease-in-out infinite;
+}
+@keyframes scrollDrop{
+  0%{transform:scaleY(0);transform-origin:top;opacity:0;}
+  40%{transform:scaleY(1);transform-origin:top;opacity:1;}
+  60%{transform:scaleY(1);transform-origin:bottom;opacity:1;}
+  100%{transform:scaleY(0);transform-origin:bottom;opacity:0;}
+}
+.scroll-cue-txt{font-size:0.55rem;letter-spacing:4px;text-transform:uppercase;color:var(--dim);}
+
+@keyframes slideDown{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* ═══════════════════════════════════════════
+   TICKER
+═══════════════════════════════════════════ */
+#ticker{
+  position:relative;z-index:2;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:var(--bg1);padding:16px 0;overflow:hidden;
+}
+.ticker-inner{
+  display:flex;gap:0;white-space:nowrap;
+  animation:ticker 25s linear infinite;width:max-content;
+}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.ticker-item{
+  display:inline-flex;align-items:center;gap:16px;
+  padding:0 30px;font-size:0.68rem;letter-spacing:3px;
+  text-transform:uppercase;color:var(--muted);
+}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+/* ═══════════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════════ */
+#countdown{
+  position:relative;z-index:2;
+  background:linear-gradient(90deg,#070400,#110900,#070400);
+  border-bottom:1px solid var(--border);
+  padding:18px 30px;
+  display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;
+}
+.cd-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,0.1);border:1px solid var(--border2);
+  border-radius:100px;padding:5px 14px;
+  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold2);
+}
+.cd-fire{animation:fireShake 0.5s infinite alternate;}
+@keyframes fireShake{0%{transform:rotate(-5deg);}100%{transform:rotate(5deg);}}
+.cd-units{display:flex;gap:8px;align-items:center;}
+.cd-box{
+  text-align:center;min-width:52px;
+  background:rgba(201,168,76,0.06);
+  border:1px solid var(--border);padding:10px 14px;
+  border-radius:var(--radius);
+}
+.cd-n{
+  font-family:'Playfair Display',serif;
+  font-size:1.7rem;font-weight:700;color:var(--gold);
+  display:block;line-height:1;
+}
+.cd-l{font-size:0.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:3px;}
+.cd-colon{font-size:1.4rem;color:var(--gold);opacity:0.4;animation:colonBlink 1s infinite;}
+@keyframes colonBlink{0%,100%{opacity:0.4;}50%{opacity:0;};}
+.cd-text{font-size:0.82rem;color:var(--text);}
+.cd-text strong{color:var(--gold2);}
+
+/* ═══════════════════════════════════════════
+   LIVE BAR
+═══════════════════════════════════════════ */
+#livebar{
+  position:relative;z-index:2;
+  background:var(--bg2);
+  border-bottom:1px solid var(--border);
+  padding:16px 30px;
+  display:flex;align-items:center;justify-content:center;
+  gap:36px;flex-wrap:wrap;
+}
+.lb-item{
+  display:flex;align-items:center;gap:9px;
+  font-size:0.72rem;letter-spacing:0.5px;color:var(--muted);
+}
+.lb-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 8px var(--gold);
+  animation:dotBlink 1.8s infinite;
+}
+@keyframes dotBlink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.lb-val{color:var(--gold2);font-weight:700;}
+
+/* ═══════════════════════════════════════════
+   COMMON SECTION STYLES
+═══════════════════════════════════════════ */
+section{position:relative;z-index:2;}
+.sec{max-width:1140px;margin:0 auto;padding:110px 30px;}
+.sec-label{
+  display:inline-flex;align-items:center;gap:14px;
+  font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);
+  margin-bottom:18px;
+}
+.sec-label::before{content:'';width:28px;height:1px;background:var(--gold);}
+.sec-h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5vw,4rem);font-weight:700;line-height:1.05;
+  letter-spacing:-1.5px;margin-bottom:16px;
+}
+.sec-h2 em{font-style:italic;color:var(--gold);}
+.sec-p{color:var(--muted);font-size:0.93rem;line-height:1.85;max-width:560px;}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(44px);transition:opacity 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1);}
+.rv.in{opacity:1;transform:none;}
+.rv-l{opacity:0;transform:translateX(-44px);transition:opacity 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1);}
+.rv-l.in{opacity:1;transform:none;}
+.rv-r{opacity:0;transform:translateX(44px);transition:opacity 1s cubic-bezier(0.16,1,0.3,1),transform 1s cubic-bezier(0.16,1,0.3,1);}
+.rv-r.in{opacity:1;transform:none;}
+
+/* ═══════════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════════ */
+#services{background:linear-gradient(180deg,var(--bg) 0%,var(--bg1) 100%);}
+.svc-search-wrap{
+  position:relative;max-width:480px;margin:40px 0 50px;
+}
+.svc-search{
+  width:100%;padding:15px 50px 15px 22px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid var(--border);color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:0.88rem;
+  border-radius:var(--radius);outline:none;transition:all 0.3s;
+}
+.svc-search::placeholder{color:var(--dim);}
+.svc-search:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.08);}
+.svc-search-ico{
+  position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  color:var(--gold);font-size:1rem;pointer-events:none;
+}
+.svc-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;
+}
+.svc-card{
+  background:var(--card);padding:38px 32px;
+  border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+  cursor:none;transition:all 0.45s cubic-bezier(0.16,1,0.3,1);
+  position:relative;overflow:hidden;
+}
+.svc-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(201,168,76,0.07) 0%,transparent 65%);
+  opacity:0;transition:opacity 0.4s;pointer-events:none;
+}
+.svc-card:hover::after{opacity:1;}
+.svc-card:hover{background:var(--card2);transform:translateY(-4px);}
+.svc-ico{font-size:2rem;margin-bottom:22px;}
+.svc-n{
+  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;display:block;
+}
+.svc-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.45rem;font-weight:700;margin-bottom:12px;
+  transition:color 0.3s;
+}
+.svc-card:hover h3{color:var(--gold2);}
+.svc-card p{font-size:0.82rem;color:var(--muted);line-height:1.75;margin-bottom:22px;}
+.svc-tag{
+  display:inline-block;
+  border:1px solid var(--border2);color:var(--gold);
+  font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 14px;border-radius:var(--radius);
+  transition:all 0.3s;
+}
+.svc-card:hover .svc-tag{background:var(--gold);color:#000;border-color:var(--gold);}
+.svc-arr{
+  position:absolute;top:32px;right:32px;
+  width:34px;height:34px;border:1px solid var(--border);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:0.85rem;color:var(--gold);transform:rotate(-45deg);
+  transition:all 0.35s;
+}
+.svc-card:hover .svc-arr{
+  background:var(--gold);color:#000;
+  border-color:var(--gold);transform:rotate(0);
+  box-shadow:0 5px 20px rgba(201,168,76,0.35);
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT / NUMBERS BAND
+═══════════════════════════════════════════ */
+#numbers{
+  position:relative;z-index:2;
+  background:var(--bg2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:70px 30px;
+}
+.numbers-grid{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+}
+.num-cell{
+  padding:40px 30px;text-align:center;background:var(--card);
+  border-right:1px solid var(--border);
+  transition:background 0.3s;
+}
+.num-cell:hover{background:var(--card2);}
+.num-big{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;font-weight:700;color:var(--gold);
+  display:block;line-height:1;margin-bottom:8px;
+}
+.num-lbl{font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+
+/* ═══════════════════════════════════════════
+   PORTFOLIO
+═══════════════════════════════════════════ */
+#portfolio{background:var(--bg);}
+.pf-filters{display:flex;gap:8px;flex-wrap:wrap;margin:36px 0 32px;}
+.pf-btn{
+  padding:9px 22px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);
+  font-family:'DM Sans',sans-serif;font-size:0.68rem;letter-spacing:2.5px;
+  text-transform:uppercase;font-weight:700;
+  border-radius:var(--radius);cursor:none;transition:all 0.3s;
+}
+.pf-btn.on,.pf-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.05);}
+.pf-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.pf-item{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  aspect-ratio:4/3;cursor:none;
+  border:1px solid var(--border);background:var(--card);
+  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),
+             box-shadow 0.5s;
+}
+.pf-item:hover{transform:scale(1.025);box-shadow:0 24px 60px rgba(0,0,0,0.5);}
+.pf-item:nth-child(1){grid-column:1/3;aspect-ratio:2/1;}
+.pf-item:nth-child(4){grid-column:2/4;aspect-ratio:2/1;}
+.pf-ph{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(135deg,#0c0c0c,#161616);
+}
+.pf-ph-ico{font-size:2.8rem;}
+.pf-ph-lbl{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);}
+.pf-over{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(3,3,3,0.96) 0%,rgba(3,3,3,0.2) 60%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:26px;
+  opacity:0;transition:opacity 0.4s;
+}
+.pf-item:hover .pf-over{opacity:1;}
+.pf-over-tag{font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.pf-over h4{
+  font-family:'Playfair Display',serif;
+  font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:10px;
+}
+.pf-over-result{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:0.65rem;letter-spacing:1.5px;color:var(--gold2);
+}
+.pf-over-result::before{content:'↑';font-size:0.75rem;}
+
+/* ═══════════════════════════════════════════
+   PROCESS
+═══════════════════════════════════════════ */
+#process{
+  background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
+  border-top:1px solid var(--border);
+}
+.process-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin-top:60px;position:relative;
+}
+.process-steps::before{
+  content:'';position:absolute;top:42px;left:10%;right:10%;
+  height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);
+}
+.proc-step{padding:40px 28px 30px;text-align:center;}
+.proc-circle{
+  width:84px;height:84px;border-radius:50%;
+  border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;
+  background:rgba(201,168,76,0.04);
+  font-family:'Playfair Display',serif;font-size:1.6rem;
+  font-weight:700;color:var(--gold);
+  transition:all 0.4s;position:relative;z-index:1;
+}
+.proc-step:hover .proc-circle{
+  background:var(--gold);color:#000;
+  box-shadow:0 10px 40px rgba(201,168,76,0.3);
+}
+.proc-step h4{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;font-weight:700;margin-bottom:10px;
+  transition:color 0.3s;
+}
+.proc-step:hover h4{color:var(--gold2);}
+.proc-step p{font-size:0.8rem;color:var(--muted);line-height:1.7;}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════ */
+#testimonials{
+  background:var(--bg2);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.testi-marquee{overflow:hidden;margin-top:60px;padding-bottom:20px;}
+.testi-track{
+  display:flex;gap:18px;width:max-content;
+  animation:scroll 32s linear infinite;
+}
+.testi-track:hover{animation-play-state:paused;}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.tc{
+  width:310px;flex-shrink:0;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+  transition:border-color 0.35s,transform 0.35s;
+}
+.tc:hover{border-color:var(--gold);transform:translateY(-4px);}
+.tc-q{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;color:var(--gold);line-height:0.4;
+  margin-bottom:14px;display:block;
+}
+.tc-txt{font-size:0.83rem;color:var(--muted);line-height:1.8;margin-bottom:22px;}
+.tc-bot{display:flex;align-items:center;gap:13px;}
+.tc-av{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),#6b4e1a);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#000;
+}
+.tc-name{font-size:0.85rem;font-weight:700;}
+.tc-loc{font-size:0.68rem;color:var(--dim);margin-top:2px;}
+.tc-stars{color:var(--gold);font-size:0.65rem;letter-spacing:2px;margin-top:3px;}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+#contact{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;margin-top:60px;align-items:start;}
+.contact-cards{display:flex;flex-direction:column;gap:20px;}
+.cc{
+  display:flex;gap:18px;align-items:flex-start;
+  padding:22px;border:1px solid var(--border);
+  border-radius:var(--radius);background:var(--card);
+  transition:border-color 0.3s,background 0.3s;
+}
+.cc:hover{border-color:var(--gold);background:var(--card2);}
+.cc-ico{
+  width:46px;height:46px;border-radius:50%;flex-shrink:0;
+  border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  background:rgba(201,168,76,0.05);
+}
+.cc-lbl{font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+.cc-val{font-size:0.9rem;color:var(--text);}
+
+/* Form */
+.form-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:40px;}
+.fg{margin-bottom:18px;}
+.fl{
+  display:block;font-size:0.6rem;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:700;
+}
+.fi,.fta,.fs{
+  width:100%;padding:15px 18px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid var(--border);color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:0.87rem;
+  border-radius:var(--radius);outline:none;transition:all 0.3s;
+}
+.fi::placeholder,.fta::placeholder{color:var(--dim);}
+.fi:focus,.fta:focus,.fs:focus{
+  border-color:var(--gold);
+  background:rgba(201,168,76,0.03);
+  box-shadow:0 0 0 3px rgba(201,168,76,0.07);
+}
+.fs{
+  -webkit-appearance:none;appearance:none;cursor:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+  padding-right:44px;
+}
+.fs option{background:#111;color:var(--text);}
+.fta{resize:none;min-height:125px;}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.btn-send{
+  width:100%;padding:17px;
+  background:var(--gold);color:#000;
+  font-family:'DM Sans',sans-serif;font-weight:700;
+  font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;
+  border:none;border-radius:var(--radius);
+  transition:all 0.35s;overflow:hidden;position:relative;
+  cursor:none;
+}
+.btn-send::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.22),transparent 70%);
+  transform:translateX(-100%);transition:transform 0.55s;
+}
+.btn-send:hover::after{transform:translateX(100%);}
+.btn-send:hover{box-shadow:0 12px 40px rgba(201,168,76,0.35);transform:translateY(-2px);}
+.form-ok{
+  display:none;text-align:center;padding:40px 20px;
+}
+.form-ok-ico{font-size:3rem;margin-bottom:14px;display:block;}
+.form-ok h3{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;color:var(--gold2);margin-bottom:10px;
+}
+.form-ok p{font-size:0.85rem;color:var(--muted);line-height:1.7;}
+
+/* ═══════════════════════════════════════════
+   PAYMENT
+═══════════════════════════════════════════ */
+#payment{
+  position:relative;z-index:2;
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  padding:80px 30px;text-align:center;
+}
+.pay-wrap{
+  max-width:700px;margin:0 auto;
+}
+.pay-cards{
+  display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:46px;
+}
+.pay-card{
+  flex:1;min-width:200px;max-width:280px;
+  border:1px solid var(--border);border-radius:var(--radius);
+  padding:32px 28px;background:var(--card);
+  transition:all 0.35s;cursor:default;
+}
+.pay-card:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+.pay-ico{font-size:2.2rem;margin-bottom:16px;display:block;}
+.pay-name{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.pay-num{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold2);}
+.pay-sub{font-size:0.7rem;color:var(--dim);margin-top:6px;}
+.pay-note{
+  margin-top:28px;font-size:0.72rem;color:var(--muted);
+  line-height:1.7;max-width:420px;margin-left:auto;margin-right:auto;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{
+  position:relative;z-index:2;
+  border-top:1px solid var(--border);
+  padding:48px 48px 36px;
+}
+.footer-top{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:40px;flex-wrap:wrap;margin-bottom:40px;
+}
+.footer-brand-wrap .footer-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.35rem;letter-spacing:3px;color:var(--gold2);
+  margin-bottom:12px;
+}
+.footer-brand-wrap .footer-logo span{color:var(--gold);}
+.footer-brand-wrap p{font-size:0.78rem;color:var(--muted);max-width:240px;line-height:1.7;}
+.footer-col h5{
+  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col ul li a{
+  font-size:0.8rem;color:var(--muted);transition:color 0.3s;
+}
+.footer-col ul li a:hover{color:var(--gold2);}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+  border-top:1px solid var(--border);padding-top:28px;
+}
+.footer-copy{font-size:0.68rem;color:var(--dim);letter-spacing:1px;}
+.footer-socials{display:flex;gap:14px;}
+.fsoc{
+  width:36px;height:36px;border:1px solid var(--border);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;color:var(--muted);
+  transition:all 0.3s;
+}
+.fsoc:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.07);}
+
+/* ═══════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════ */
+#modal{
+  display:none;position:fixed;inset:0;z-index:8000;
+  background:rgba(0,0,0,0.97);backdrop-filter:blur(20px);
+  align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.35s;
+}
+#modal.on{display:flex;opacity:1;}
+.modal-inner{
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:var(--radius);width:90%;max-width:500px;
+  padding:44px;position:relative;max-height:92vh;overflow-y:auto;
+  transform:scale(0.9);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+#modal.on .modal-inner{transform:scale(1);}
+.modal-x{
+  position:absolute;top:18px;right:20px;
+  background:none;border:none;color:var(--gold);
+  font-size:1.7rem;line-height:1;cursor:none;
+  transition:transform 0.3s;
+}
+.modal-x:hover{transform:rotate(90deg);}
+.m-tag{font-size:0.58rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.m-title{
+  font-family:'Playfair Display',serif;
+  font-size:2.1rem;font-weight:700;margin-bottom:10px;
+}
+.m-price{
+  display:inline-block;
+  border:1px solid var(--border2);color:var(--gold2);
+  font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;
+  padding:7px 18px;border-radius:var(--radius);margin-bottom:18px;
+}
+.m-desc{font-size:0.88rem;color:var(--muted);line-height:1.8;margin-bottom:30px;}
+.m-features{list-style:none;margin-bottom:28px;}
+.m-features li{
+  padding:10px 0;border-bottom:1px solid var(--border);
+  font-size:0.82rem;color:var(--muted);display:flex;align-items:center;gap:10px;
+}
+.m-features li::before{content:'✦';color:var(--gold);font-size:0.6rem;}
+.m-cta{
+  display:block;background:var(--gold);color:#000;
+  padding:16px;text-align:center;border-radius:var(--radius);
+  font-weight:700;font-size:0.72rem;letter-spacing:2.5px;text-transform:uppercase;
+  transition:all 0.35s;
+}
+.m-cta:hover{box-shadow:0 12px 40px rgba(201,168,76,0.35);transform:translateY(-2px);}
+
+/* ═══════════════════════════════════════════
+   WHATSAPP FLOAT
+═══════════════════════════════════════════ */
+#waFloat{
+  position:fixed;bottom:28px;right:26px;z-index:600;
+  display:flex;flex-direction:column;align-items:flex-end;gap:10px;
+}
+.wa-tip{
+  background:var(--card);border:1px solid var(--border2);
+  color:var(--text);border-radius:8px;
+  padding:10px 16px;font-size:0.78rem;font-weight:600;
+  white-space:nowrap;
+  opacity:0;transform:translateX(12px);
+  transition:all 0.35s;pointer-events:none;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+#waFloat:hover .wa-tip{opacity:1;transform:translateX(0);}
+.wa-fab{
+  width:60px;height:60px;border-radius:50%;
+  background:#25d366;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 28px rgba(37,211,102,0.4);
+  transition:all 0.35s;animation:waWobble 3.5s ease-in-out infinite;
+}
+.wa-fab:hover{transform:scale(1.12);box-shadow:0 10px 40px rgba(37,211,102,0.55);}
+@keyframes waWobble{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+.wa-fab svg{width:32px;height:32px;fill:#fff;}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:1024px){
+  .svc-grid{grid-template-columns:repeat(2,1fr);}
+  .pf-grid{grid-template-columns:repeat(2,1fr);}
+  .pf-item:nth-child(1){grid-column:auto;aspect-ratio:4/3;}
+  .pf-item:nth-child(4){grid-column:auto;aspect-ratio:4/3;}
+  .process-steps{grid-template-columns:repeat(2,1fr);}
+  .contact-grid{grid-template-columns:1fr;}
+  .numbers-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  #nav{padding:16px 20px;}
+  #nav.scrolled{padding:12px 20px;}
+  .nav-menu,.nav-wa{display:none;}
+  .hamburger{display:flex;}
+  .hero-kpis{flex-direction:column;border-left:none;}
+  .hero-kpi{border-left:1px solid var(--border);}
+  .svc-grid{grid-template-columns:1fr;}
+  .pf-grid{grid-template-columns:1fr;}
+  .process-steps{grid-template-columns:1fr;}
+  .process-steps::before{display:none;}
+  footer{padding:36px 20px;}
+  .footer-top{flex-direction:column;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .form-row2{grid-template-columns:1fr;}
+  #countdown{gap:14px;}
+  .cursor-dot,#cur-dot,#cur-ring{display:none;}
+  body{cursor:auto;}
+  .btn-gold,.btn-ghost,.btn-send,.svc-card,.pf-btn,.pf-item,.modal-x,.wa-fab,.pay-card{cursor:pointer;}
+  .numbers-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:480px){
+  .hero-h1{letter-spacing:-2px;}
+  .numbers-grid{grid-template-columns:1fr;}
+  .hero-kpis{gap:0;}
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <img src="1773390803669.png" alt="Mitché" class="profile-img">
-        <h1 style="font-size: 2.2rem; letter-spacing: -1.5px;">Mitche Digital <span style="color:var(--accent)">360</span></h1>
-        <div class="stats-bar">
-            <div class="stat-item"><span class="stat-number" data-target="150">0</span><span class="stat-label">Projets</span></div>
-            <div class="stat-item"><span class="stat-number" data-target="98">0</span><span class="stat-label">% Succès</span></div>
-        </div>
-    </header>
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">Mitche<span>.</span>Digital</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-pct" id="loaderPct">0%</div>
+</div>
 
-    <div class="search-container">
-        <input type="text" class="search-bar" placeholder="Rechercher un service d'élite..." id="searchInput" onkeyup="searchFunction()">
+<!-- CURSOR -->
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- CANVAS -->
+<canvas id="bgCanvas"></canvas>
+<div id="noise"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-brand">Mitche<span>.</span>Digital</a>
+  <ul class="nav-menu">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#process">Processus</a></li>
+    <li><a href="#testimonials">Avis</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/2250150882462" class="nav-wa" target="_blank">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+  <button class="hamburger" id="ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#portfolio" onclick="closeMobile()">Portfolio</a>
+  <a href="#process" onclick="closeMobile()">Processus</a>
+  <a href="#testimonials" onclick="closeMobile()">Avis</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="https://wa.me/2250150882462" target="_blank" style="color:var(--gold2)">WhatsApp →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Agence Digitale d'Élite — Bouaké, CI
+  </div>
+
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-ring">
+      <img src="1773390803669.png" alt="Mitché — Fondateur">
     </div>
+    <span class="hero-status">✦ DISPONIBLE</span>
+  </div>
 
-    <main class="grid" id="servicesGrid">
-        <div class="window-card" onclick="openService('Prompt Design', '25.000 FCFA', 'Ingénierie IA de précision pour automatiser vos revenus et booster votre productivité.', 'https://img.freepik.com/free-photo/robot-hand-pointing-virtual-screen_53876-120614.jpg')">
-            <h3>🤖 Prompt Design</h3><p>À partir de 25.000 FCFA</p></div>
-        
-        <div class="window-card" onclick="openService('KwaiCut Pro', '5.000 FCFA', 'Montage vidéo viral haute rétention pour TikTok, Reels et Kwai.', 'https://img.freepik.com/free-photo/video-editing-software_53876-124611.jpg')">
-            <h3>🎬 KwaiCut Pro</h3><p>5.000 FCFA / vidéo</p></div>
+  <p class="hero-eyebrow">Mitche Digital 360</p>
 
-        <div class="window-card" onclick="openService('Smart Stock', '50.000 FCFA', 'Logiciel intelligent de gestion d\'inventaire pour commerces et usines.', 'https://img.freepik.com/free-photo/warehouse-inventory-management_53876-121014.jpg')">
-            <h3>📦 Smart Stock</h3><p>Licence Pro</p></div>
+  <h1 class="hero-h1">
+    <span class="line1">Votre succès</span>
+    <span class="line2">digital</span>
+    <span class="line3">commence ici.</span>
+  </h1>
 
-        <div class="window-card" onclick="openService('Boost TikTok', '15.000 FCFA', 'Augmentation réelle de votre visibilité et de vos abonnés TikTok.', 'https://img.freepik.com/free-photo/social-media-marketing-concept_53876-124610.jpg')">
-            <h3>🚀 Boost TikTok</h3><p>Pack Croissance</p></div>
+  <p class="hero-desc">Nous créons des expériences numériques extraordinaires — IA, vidéo virale, growth hacking et formations d'élite pour propulser votre business au sommet.</p>
 
-        <div class="window-card" onclick="openService('Masterclass IA', '30.000 FCFA', 'Formation complète pour dompter l\'IA et gagner 10h par semaine.', 'https://img.freepik.com/free-photo/ai-technology-concept_53876-120615.jpg')">
-            <h3>🎓 Masterclass IA</h3><p>Formation 2026</p></div>
+  <div class="hero-btns">
+    <a href="#services" class="btn-gold">Voir nos services</a>
+    <a href="#contact" class="btn-ghost">Démarrer un projet</a>
+  </div>
 
-        <div class="window-card" onclick="openService('Vente WhatsApp', '10.000 FCFA', 'Techniques secrètes pour vendre massivement par statut WhatsApp.', 'https://img.freepik.com/free-photo/whatsapp-icon-concept_53876-121015.jpg')">
-            <h3>🟢 Vente WhatsApp</h3><p>Méthode Closing</p></div>
+  <div class="hero-kpis">
+    <div class="hero-kpi"><span class="kpi-num" data-t="150">0</span><span class="kpi-lbl">Projets livrés</span></div>
+    <div class="hero-kpi"><span class="kpi-num" data-t="98">0</span><span class="kpi-lbl">% Satisfaction</span></div>
+    <div class="hero-kpi"><span class="kpi-num" data-t="5">0</span><span class="kpi-lbl">Années d'expertise</span></div>
+    <div class="hero-kpi"><span class="kpi-num" data-t="48">0</span><span class="kpi-lbl">H délai livraison</span></div>
+  </div>
 
-        <div class="window-card" onclick="openModal('payModal')" style="border-color: var(--orange);">
-            <h3>💳 Paiement CI</h3><p>Orange Money & Wave</p></div>
-    </main>
+  <div class="scroll-cue">
+    <div class="scroll-cue-line"></div>
+    <span class="scroll-cue-txt">Scroll</span>
+  </div>
+</section>
 
-    <div id="serviceModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('serviceModal')">&times;</button>
-            <img id="modalImg" class="modal-img" src="" alt="Service">
-            <h2 id="modalTitle" style="color:var(--accent); margin-bottom:10px;"></h2>
-            <div id="modalPrice" class="price-tag"></div>
-            <p id="modalDesc" style="font-size:0.9rem; opacity:0.8; text-align:left;"></p>
-            <a id="modalWA" href="#" class="btn-cta">COMMANDER CE SERVICE 📲</a>
-        </div>
+<!-- TICKER -->
+<div id="ticker">
+  <div class="ticker-inner" id="tickerInner"></div>
+</div>
+
+<!-- COUNTDOWN -->
+<div id="countdown">
+  <div class="cd-badge"><span class="cd-fire">🔥</span> Offre Limitée</div>
+  <div class="cd-units">
+    <div class="cd-box"><span class="cd-n" id="cdH">00</span><span class="cd-l">Heures</span></div>
+    <span class="cd-colon">:</span>
+    <div class="cd-box"><span class="cd-n" id="cdM">00</span><span class="cd-l">Minutes</span></div>
+    <span class="cd-colon">:</span>
+    <div class="cd-box"><span class="cd-n" id="cdS">00</span><span class="cd-l">Secondes</span></div>
+  </div>
+  <p class="cd-text">Masterclass IA à <strong>-30% · 21.000 FCFA</strong> au lieu de 30.000 — Places limitées !</p>
+</div>
+
+<!-- LIVE BAR -->
+<div id="livebar">
+  <div class="lb-item"><span class="lb-dot"></span> <span class="lb-val" id="visCount">0</span>&ensp;visiteurs aujourd'hui</div>
+  <div class="lb-item">⭐ Note moyenne&ensp;<span class="lb-val">4.98 / 5</span></div>
+  <div class="lb-item">⚡ Délai de livraison&ensp;<span class="lb-val">48h garanties</span></div>
+  <div class="lb-item">🔒 Satisfaction&ensp;<span class="lb-val">100% ou remboursé</span></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sec">
+    <div class="rv">
+      <p class="sec-label">Ce que nous offrons</p>
+      <h2 class="sec-h2">Services <em>d'élite</em></h2>
+      <p class="sec-p">Des solutions digitales taillées sur-mesure pour dominer votre marché et générer des résultats concrets.</p>
+      <div class="svc-search-wrap">
+        <input class="svc-search" id="svcSearch" type="text" placeholder="Rechercher un service…" oninput="filterSvc()">
+        <span class="svc-search-ico">⌕</span>
+      </div>
     </div>
+    <div class="svc-grid" id="svcGrid">
 
-    <div id="payModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('payModal')">&times;</button>
-            <h2 style="margin-bottom: 20px;">Règlement Sécurisé</h2>
-            <div class="pay-box" style="background: var(--orange);">
-                <strong>ORANGE MONEY</strong><br><span>07 07 XX XX XX</span><br><small>Nom : M. KOUAKOU</small>
+      <div class="svc-card rv" data-svc onclick="openModal('Prompt Design','25.000 FCFA','Ingénierie de prompts IA de précision. Nous concevons des systèmes intelligents qui automatisent vos tâches répétitives, rédigent du contenu viral et multiplient votre productivité par 10. Résultats mesurables dès la première semaine.',['Prompts sur-mesure pour votre activité','Automatisation des tâches répétitives','Rédaction de contenu à grande échelle','Formation et documentation incluse','Support 30 jours après livraison'])">
+        <span class="svc-arr">→</span>
+        <div class="svc-ico">🤖</div>
+        <span class="svc-n">Service 01</span>
+        <h3>Prompt Design IA</h3>
+        <p>Ingénierie IA de précision pour automatiser vos revenus, rédiger du contenu viral et booster votre productivité de manière exponentielle.</p>
+        <span class="svc-tag">Dès 25.000 FCFA</span>
+      </div>
+
+      <div class="svc-card rv" data-svc onclick="openModal('KwaiCut Pro','5.000 FCFA','Montage vidéo viral haute rétention optimisé algorithmiquement. Nos vidéos sont conçues pour capturer l\'attention dans les 3 premières secondes et maintenir l\'engagement jusqu\'à la fin. Résultats garantis sur TikTok, Reels et Kwai.',['Montage professionnel haute rétention','Sous-titres animés inclus','Optimisation algorithmique TikTok/Reels','Musique et effets premium','Livraison en 24-48h'])" style="transition-delay:0.08s">
+        <span class="svc-arr">→</span>
+        <div class="svc-ico">🎬</div>
+        <span class="svc-n">Service 02</span>
+        <h3>KwaiCut Pro</h3>
+        <p>Montage vidéo viral haute rétention pour TikTok, Reels et Kwai. Vos vidéos conçues pour exploser les algorithmes et multiplier vos vues.</p>
+        <span class="svc-tag">5.000 FCFA / vidéo</span>
+      </div>
+
+      <div class="svc-card rv" data-svc onclick="openModal('Smart Stock','50.000 FCFA','Logiciel intelligent de gestion d\'inventaire, conçu spécifiquement pour les commerces et industries de Côte d\'Ivoire. Interface intuitive, rapports détaillés en temps réel, alertes de stock automatiques. Zéro erreur, 100% efficace.',['Tableau de bord en temps réel','Alertes stock automatiques','Rapports détaillés et exports','Interface mobile incluse','Formation et installation comprises'])" style="transition-delay:0.16s">
+        <span class="svc-arr">→</span>
+        <div class="svc-ico">📦</div>
+        <span class="svc-n">Service 03</span>
+        <h3>Smart Stock</h3>
+        <p>Logiciel intelligent de gestion d'inventaire pour commerces et industries. Tableau de bord en temps réel, zéro perte, zéro erreur.</p>
+        <span class="svc-tag">Licence 50.000 FCFA</span>
+      </div>
+
+      <div class="svc-card rv" data-svc onclick="openModal('Boost TikTok','15.000 FCFA','Stratégie de croissance TikTok 100% organique et réelle. Nous analysons votre niche, optimisons votre profil et mettons en place une stratégie de contenu pour vous amener des abonnés qualifiés et un engagement authentique qui se convertit en clients.',['Audit complet de votre compte','Stratégie de contenu personnalisée','Croissance organique garantie','Abonnés qualifiés dans votre niche','Rapport de performance hebdomadaire'])" style="transition-delay:0.08s">
+        <span class="svc-arr">→</span>
+        <div class="svc-ico">🚀</div>
+        <span class="svc-n">Service 04</span>
+        <h3>Boost TikTok</h3>
+        <p>Croissance TikTok organique et réelle. Stratégie sur-mesure pour attirer des abonnés qualifiés qui se convertissent en clients.</p>
+        <span class="svc-tag">Pack 15.000 FCFA</span>
+      </div>
+
+      <div class="svc-card rv" data-svc onclick="openModal('Masterclass IA','30.000 FCFA → 21.000 FCFA 🔥','Formation complète et intensive pour maîtriser l\'intelligence artificielle et l\'intégrer à votre business. Automatisez vos tâches, créez des revenus passifs et gagnez minimum 10h par semaine. Accès à vie + mises à jour incluses.',['12 modules vidéo HD accès à vie','Templates et outils prêts à l\'emploi','Communauté privée de membres','Coaching Q&A mensuel inclus','Certificat de complétion officiel'])" style="transition-delay:0.16s">
+        <span class="svc-arr">→</span>
+        <div class="svc-ico">🎓</div>
+        <span class="svc-n">Service 05</span>
+        <h3>Masterclass IA</h3>
+        <p>Formation intensive pour maîtriser l'IA. Automatisez tout, créez des revenus passifs, gagnez 10h/semaine. Offre spéciale limitée.</p>
+        <span class="svc-tag">🔥 21.000 FCFA</span>
+      </div>
+
+      <div class="svc-card rv" data-svc onclick="openModal('Vente WhatsApp','10.000 FCFA','La méthode closing WhatsApp la plus efficace en Côte d\'Ivoire. Scripts éprouvés, techniques de persuasion avancées et stratégies de relance pour vendre massivement via vos statuts et convertir vos contacts en clients fidèles.',['Scripts de vente clé en main','50+ messages et réponses types','Stratégie statuts WhatsApp','Techniques de closing avancées','Accès groupe privé de vendeurs'])" style="transition-delay:0.24s">
+        <span class="svc-arr">→</span>
+        <div class="svc-ico">🟢</div>
+        <span class="svc-n">Service 06</span>
+        <h3>Vente WhatsApp</h3>
+        <p>Méthode closing WhatsApp éprouvée avec scripts inclus. Vendez massivement via vos statuts et convertissez vos contacts en clients.</p>
+        <span class="svc-tag">Méthode 10.000 FCFA</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<div id="numbers">
+  <div class="numbers-grid">
+    <div class="num-cell rv"><span class="num-big" data-t="150">0</span><span class="num-lbl">Projets réalisés</span></div>
+    <div class="num-cell rv" style="transition-delay:.1s"><span class="num-big" data-t="98">0</span><span class="num-lbl">% de satisfaction</span></div>
+    <div class="num-cell rv" style="transition-delay:.2s"><span class="num-big" data-t="5">0</span><span class="num-lbl">Ans d'expertise</span></div>
+    <div class="num-cell rv" style="transition-delay:.3s"><span class="num-big" data-t="2000">0</span><span class="num-lbl">Vies transformées</span></div>
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="sec">
+    <div class="rv">
+      <p class="sec-label">Nos réalisations</p>
+      <h2 class="sec-h2">Portfolio <em>élite</em></h2>
+      <p class="sec-p">Chaque projet est une démonstration de notre engagement envers l'excellence et les résultats mesurables.</p>
+      <div class="pf-filters">
+        <button class="pf-btn on" onclick="filterPf('all',this)">Tout voir</button>
+        <button class="pf-btn" onclick="filterPf('ia',this)">IA & Prompt</button>
+        <button class="pf-btn" onclick="filterPf('video',this)">Vidéo</button>
+        <button class="pf-btn" onclick="filterPf('social',this)">Social Media</button>
+        <button class="pf-btn" onclick="filterPf('web',this)">Web & Tech</button>
+      </div>
+    </div>
+    <div class="pf-grid">
+      <div class="pf-item rv" data-cat="ia">
+        <div class="pf-ph"><div class="pf-ph-ico">🤖</div><div class="pf-ph-lbl">Automatisation IA</div></div>
+        <div class="pf-over"><span class="pf-over-tag">Prompt Design</span><h4>Système IA E-commerce Abidjan</h4><span class="pf-over-result">+340% de productivité</span></div>
+      </div>
+      <div class="pf-item rv" data-cat="video" style="transition-delay:.08s">
+        <div class="pf-ph"><div class="pf-ph-ico">🎬</div><div class="pf-ph-lbl">Contenu Viral</div></div>
+        <div class="pf-over"><span class="pf-over-tag">KwaiCut Pro</span><h4>Campagne TikTok Fashion CI</h4><span class="pf-over-result">2,4M de vues en 7 jours</span></div>
+      </div>
+      <div class="pf-item rv" data-cat="social" style="transition-delay:.16s">
+        <div class="pf-ph"><div class="pf-ph-ico">🚀</div><div class="pf-ph-lbl">Growth Hacking</div></div>
+        <div class="pf-over"><span class="pf-over-tag">Boost TikTok</span><h4>Marque Beauté Bouaké</h4><span class="pf-over-result">+18.000 abonnés en 30j</span></div>
+      </div>
+      <div class="pf-item rv" data-cat="ia" style="transition-delay:.08s">
+        <div class="pf-ph"><div class="pf-ph-ico">📊</div><div class="pf-ph-lbl">Logiciel Métier</div></div>
+        <div class="pf-over"><span class="pf-over-tag">Smart Stock</span><h4>Gestion Entrepôt Industriel</h4><span class="pf-over-result">0 erreur de stock depuis 8 mois</span></div>
+      </div>
+      <div class="pf-item rv" data-cat="web" style="transition-delay:.16s">
+        <div class="pf-ph"><div class="pf-ph-ico">💻</div><div class="pf-ph-lbl">Web Design</div></div>
+        <div class="pf-over"><span class="pf-over-tag">Site Web Élite</span><h4>Boutique Premium Cocody</h4><span class="pf-over-result">+280% de conversions</span></div>
+      </div>
+      <div class="pf-item rv" data-cat="social" style="transition-delay:.24s">
+        <div class="pf-ph"><div class="pf-ph-ico">💬</div><div class="pf-ph-lbl">Vente WhatsApp</div></div>
+        <div class="pf-over"><span class="pf-over-tag">Closing WhatsApp</span><h4>Réseau Revendeurs CI</h4><span class="pf-over-result">CA x4 en 60 jours</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="sec">
+    <div class="rv" style="text-align:center;max-width:600px;margin:0 auto;">
+      <p class="sec-label" style="justify-content:center">Comment ça marche</p>
+      <h2 class="sec-h2" style="text-align:center">Notre <em>processus</em></h2>
+      <p class="sec-p" style="margin:0 auto;">De la première discussion à la livraison finale, chaque étape est pensée pour garantir votre succès.</p>
+    </div>
+    <div class="process-steps">
+      <div class="proc-step rv">
+        <div class="proc-circle">01</div>
+        <h4>Consultation</h4>
+        <p>Discussion approfondie pour comprendre vos objectifs, votre marché et définir la stratégie optimale.</p>
+      </div>
+      <div class="proc-step rv" style="transition-delay:.1s">
+        <div class="proc-circle">02</div>
+        <h4>Stratégie</h4>
+        <p>Élaboration d'un plan d'action sur-mesure avec des objectifs clairs et des KPIs mesurables.</p>
+      </div>
+      <div class="proc-step rv" style="transition-delay:.2s">
+        <div class="proc-circle">03</div>
+        <h4>Exécution</h4>
+        <p>Réalisation avec une attention méticuleuse aux détails. Vous êtes informé à chaque étape.</p>
+      </div>
+      <div class="proc-step rv" style="transition-delay:.3s">
+        <div class="proc-circle">04</div>
+        <h4>Résultats</h4>
+        <p>Livraison, formation et suivi. Votre succès est notre priorité absolue, même après la livraison.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="sec" style="padding-bottom:0">
+    <div class="rv">
+      <p class="sec-label">Ils nous font confiance</p>
+      <h2 class="sec-h2">Clients <em>satisfaits</em></h2>
+      <p class="sec-p">Plus de 150 entrepreneurs et entreprises ont déjà transformé leur business avec Mitche Digital 360.</p>
+    </div>
+  </div>
+  <div class="testi-marquee" style="padding:60px 0 110px">
+    <div class="testi-track" id="testiTrack"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec">
+    <div class="rv">
+      <p class="sec-label">Travaillons ensemble</p>
+      <h2 class="sec-h2">Démarrons votre <em>projet</em></h2>
+      <p class="sec-p">Remplissez le formulaire. Nous vous recontactons sous 24h pour construire quelque chose d'exceptionnel.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-cards rv-l">
+        <div class="cc"><div class="cc-ico">📍</div><div><div class="cc-lbl">Localisation</div><div class="cc-val">Bouaké, Côte d'Ivoire</div></div></div>
+        <div class="cc"><div class="cc-ico">📱</div><div><div class="cc-lbl">WhatsApp direct</div><div class="cc-val">+225 01 50 88 24 62</div></div></div>
+        <div class="cc"><div class="cc-ico">⏰</div><div><div class="cc-lbl">Disponibilité</div><div class="cc-val">Lun–Sam · 8h–20h GMT</div></div></div>
+        <div class="cc"><div class="cc-ico">⚡</div><div><div class="cc-lbl">Délai de réponse</div><div class="cc-val">Moins de 2 heures</div></div></div>
+        <div class="cc"><div class="cc-ico">🏆</div><div><div class="cc-lbl">Notre garantie</div><div class="cc-val">Satisfaction 100% ou remboursé</div></div></div>
+      </div>
+
+      <div class="rv-r">
+        <div class="form-box">
+          <form id="contactForm" onsubmit="sendForm(event)">
+            <div class="form-row2">
+              <div class="fg"><label class="fl">Prénom</label><input class="fi" type="text" placeholder="Jean" required></div>
+              <div class="fg"><label class="fl">Nom</label><input class="fi" type="text" placeholder="Kouakou" required></div>
             </div>
-            <div class="pay-box" style="background: var(--wave);">
-                <strong>WAVE CI</strong><br><span>01 50 88 24 62</span><br><small>Nom : MITCHE DIGITAL 360</small>
+            <div class="fg"><label class="fl">WhatsApp / Téléphone</label><input class="fi" type="tel" placeholder="+225 07 00 00 00" required></div>
+            <div class="fg">
+              <label class="fl">Service souhaité</label>
+              <select class="fs" required>
+                <option value="" disabled selected>Sélectionner un service…</option>
+                <option>🤖 Prompt Design IA — 25.000 FCFA</option>
+                <option>🎬 KwaiCut Pro — 5.000 FCFA / vidéo</option>
+                <option>📦 Smart Stock — 50.000 FCFA</option>
+                <option>🚀 Boost TikTok — 15.000 FCFA</option>
+                <option>🎓 Masterclass IA — 21.000 FCFA 🔥</option>
+                <option>🟢 Vente WhatsApp — 10.000 FCFA</option>
+                <option>💡 Autre / Demande personnalisée</option>
+              </select>
             </div>
-            <p style="font-size:0.7rem; opacity:0.6; margin-top:10px;">Envoyez la capture sur WhatsApp après le dépôt.</p>
+            <div class="fg"><label class="fl">Budget estimé</label>
+              <select class="fs">
+                <option value="" disabled selected>Budget approximatif…</option>
+                <option>Moins de 20.000 FCFA</option>
+                <option>20.000 – 50.000 FCFA</option>
+                <option>50.000 – 100.000 FCFA</option>
+                <option>Plus de 100.000 FCFA</option>
+              </select>
+            </div>
+            <div class="fg"><label class="fl">Votre message</label><textarea class="fta" placeholder="Décrivez votre projet, vos objectifs, votre délai…" required></textarea></div>
+            <button type="submit" class="btn-send">Envoyer ma demande ✦</button>
+          </form>
+          <div class="form-ok" id="formOk">
+            <span class="form-ok-ico">✦</span>
+            <h3>Demande envoyée !</h3>
+            <p>Merci pour votre confiance. Nous vous recontactons sous 24h pour bâtir quelque chose d'exceptionnel ensemble.</p>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <script>
-        // COMPTEUR DYNAMIQUE
-        const counters = document.querySelectorAll('.stat-number');
-        counters.forEach(c => {
-            const update = () => {
-                const target = +c.getAttribute('data-target');
-                const count = +c.innerText;
-                const inc = target / 150;
-                if(count < target) { c.innerText = Math.ceil(count + inc); setTimeout(update, 10); }
-                else { c.innerText = target + (target > 90 ? '%' : '+'); }
-            }; update();
-        });
+<!-- PAYMENT -->
+<section id="payment">
+  <div class="pay-wrap">
+    <div class="rv">
+      <p class="sec-label" style="justify-content:center">Paiement sécurisé</p>
+      <h2 class="sec-h2" style="text-align:center">Réglez <em>facilement</em></h2>
+    </div>
+    <div class="pay-cards rv">
+      <div class="pay-card">
+        <span class="pay-ico">🟠</span>
+        <div class="pay-name">Orange Money CI</div>
+        <div class="pay-num">07 07 XX XX XX</div>
+        <div class="pay-sub">Nom : M. KOUAKOU</div>
+      </div>
+      <div class="pay-card">
+        <span class="pay-ico">🔵</span>
+        <div class="pay-name">Wave CI</div>
+        <div class="pay-num">01 50 88 24 62</div>
+        <div class="pay-sub">MITCHE DIGITAL 360</div>
+      </div>
+    </div>
+    <p class="pay-note rv">Après votre paiement, envoyez la capture d'écran sur WhatsApp au <strong style="color:var(--gold2)">+225 01 50 88 24 62</strong> et votre commande sera traitée immédiatement.</p>
+  </div>
+</section>
 
-        // GESTION MODALES
-        function openModal(id) { document.getElementById(id).style.display = "flex"; setTimeout(() => document.getElementById(id).classList.add('active'), 10); }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); setTimeout(() => document.getElementById(id).style.display = "none", 300); }
-        
-        function openService(title, price, desc, img) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalPrice').innerText = price;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('modalImg').src = img;
-            document.getElementById('modalWA').href = "https://wa.me/2250150882462?text=" + encodeURIComponent(`Bonjour Mitché, je commande : ${title} (${price})`);
-            openModal('serviceModal');
-        }
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand-wrap">
+      <div class="footer-logo">Mitche<span>.</span>Digital</div>
+      <p>Agence digitale d'élite basée à Bouaké, Côte d'Ivoire. Nous transformons vos idées en succès numériques mesurables.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#services">Prompt Design IA</a></li>
+        <li><a href="#services">KwaiCut Pro</a></li>
+        <li><a href="#services">Smart Stock</a></li>
+        <li><a href="#services">Boost TikTok</a></li>
+        <li><a href="#services">Masterclass IA</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#process">Processus</a></li>
+        <li><a href="#testimonials">Avis clients</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#payment">Paiement</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="https://wa.me/2250150882462" target="_blank">WhatsApp Direct</a></li>
+        <li><a href="#contact">Formulaire</a></li>
+        <li><a href="#">Bouaké, CI</a></li>
+        <li><a href="#">Lun–Sam 8h–20h</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Mitche Digital 360 — Bouaké, Côte d'Ivoire. Tous droits réservés.</span>
+    <div class="footer-socials">
+      <a class="fsoc" href="https://wa.me/2250150882462" target="_blank" title="WhatsApp">💬</a>
+      <a class="fsoc" href="#" title="TikTok">🎵</a>
+      <a class="fsoc" href="#" title="Instagram">📷</a>
+    </div>
+  </div>
+</footer>
 
-        // RECHERCHE
-        function searchFunction() {
-            let q = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.window-card').forEach(card => {
-                card.style.display = card.innerText.toLowerCase().includes(q) ? "block" : "none";
-            });
-        }
+<!-- SERVICE MODAL -->
+<div id="modal">
+  <div class="modal-inner">
+    <button class="modal-x" onclick="closeModal()">×</button>
+    <p class="m-tag">✦ Service Elite — Mitche Digital 360</p>
+    <h2 class="m-title" id="mTitle"></h2>
+    <div class="m-price" id="mPrice"></div>
+    <p class="m-desc" id="mDesc"></p>
+    <ul class="m-features" id="mFeatures"></ul>
+    <a class="m-cta" id="mCta" href="#" target="_blank">Commander maintenant →</a>
+  </div>
+</div>
 
-        // FERMETURE AU CLIC EXTÉRIEUR
-        window.onclick = e => { if(e.target.classList.contains('modal')) closeModal(e.target.id); };
-    </script>
+<!-- WHATSAPP FLOAT -->
+<div id="waFloat">
+  <div class="wa-tip">💬 Un projet ? Parlons-en !</div>
+  <a class="wa-fab" href="https://wa.me/2250150882462?text=Bonjour%20Mitché%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services." target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
 
-    <footer>&copy; 2026 MITCHE DIGITAL 360 &bull; BOUAKÉ</footer>
+<script>
+/* ══════════════════════════════════════
+   LOADER
+══════════════════════════════════════ */
+(function(){
+  const pct=document.getElementById('loaderPct');
+  let n=0;
+  const t=setInterval(()=>{
+    n=Math.min(n+(Math.random()*8+2),100);
+    pct.textContent=Math.floor(n)+'%';
+    if(n>=100){
+      clearInterval(t);
+      setTimeout(()=>{
+        document.getElementById('loader').classList.add('done');
+        document.body.style.overflow='';
+      },400);
+    }
+  },60);
+})();
+document.body.style.overflow='hidden';
+
+/* ══════════════════════════════════════
+   CURSOR
+══════════════════════════════════════ */
+const dot=document.getElementById('cur-dot');
+const ring=document.getElementById('cur-ring');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  dot.style.left=mx+'px';dot.style.top=my+'px';
+});
+(function animR(){
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animR);
+})();
+document.addEventListener('mousedown',()=>ring.classList.add('click'));
+document.addEventListener('mouseup',()=>ring.classList.remove('click'));
+document.querySelectorAll('a,button,.svc-card,.pf-item,.tc,.pf-btn').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('big'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('big'));
+});
+
+/* ══════════════════════════════════════
+   MAGNETIC CARDS (service cards)
+══════════════════════════════════════ */
+document.querySelectorAll('.svc-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width*100).toFixed(1);
+    const y=((e.clientY-r.top)/r.height*100).toFixed(1);
+    card.style.setProperty('--mx',x+'%');
+    card.style.setProperty('--my',y+'%');
+  });
+});
+
+/* ══════════════════════════════════════
+   PARTICLES CANVAS
+══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('bgCanvas');
+  const ctx=c.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  class Pt{
+    constructor(){this.reset();}
+    reset(){
+      this.x=Math.random()*W;this.y=Math.random()*H;
+      this.vx=(Math.random()-.5)*0.25;this.vy=(Math.random()-.5)*0.25;
+      this.r=Math.random()*1.2+0.2;
+      this.a=Math.random()*0.45+0.05;
+      this.gold=Math.random()>.65;
+    }
+    step(){
+      this.x+=this.vx;this.y+=this.vy;
+      if(this.x<-10||this.x>W+10||this.y<-10||this.y>H+10)this.reset();
+    }
+    draw(){
+      ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=this.gold?'#c9a84c':'#ffffff';
+      ctx.globalAlpha=this.a;ctx.fill();
+    }
+  }
+  for(let i=0;i<110;i++)pts.push(new Pt());
+  function lines(){
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){
+        ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+        ctx.strokeStyle='#c9a84c';ctx.globalAlpha=(1-d/110)*0.07;
+        ctx.lineWidth=.4;ctx.stroke();
+      }
+    }
+  }
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    ctx.globalAlpha=1;
+    pts.forEach(p=>{p.step();p.draw();});
+    lines();
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ══════════════════════════════════════
+   TICKER
+══════════════════════════════════════ */
+(function(){
+  const items=['Prompt Design IA','KwaiCut Pro','Smart Stock','Boost TikTok','Masterclass IA','Vente WhatsApp','Bouaké CI','Excellence 360°','Résultats Garantis','Livraison 48h'];
+  const str=items.map(i=>`<span class="ticker-item"><span class="ticker-dot"></span>${i}</span>`).join('');
+  document.getElementById('tickerInner').innerHTML=str+str;
+})();
+
+/* ══════════════════════════════════════
+   NAVBAR SCROLL
+══════════════════════════════════════ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+});
+
+/* ══════════════════════════════════════
+   MOBILE MENU
+══════════════════════════════════════ */
+document.getElementById('ham').addEventListener('click',()=>{
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
+
+/* ══════════════════════════════════════
+   COUNTERS
+══════════════════════════════════════ */
+function animCount(el){
+  const target=+el.dataset.t;
+  const isPercent=el.closest('.hero-kpi')&&el.dataset.t==='98';
+  const isH=el.closest('.hero-kpi')&&el.dataset.t==='48';
+  let c=0;const dur=1800;const step=16;
+  const inc=target/(dur/step);
+  const t=setInterval(()=>{
+    c=Math.min(c+inc,target);
+    const val=Math.floor(c);
+    el.textContent=val+(isPercent?'%':isH?'h':target>=150?'+':target===5?'+':target===2000?'+':'');
+    if(c>=target){
+      el.textContent=target+(target===98||target===150||target===5||target===2000||target===48?
+        (target===98?'%':target===48?'h':'+'):'+');
+      clearInterval(t);
+    }
+  },step);
+}
+const countObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){animCount(e.target);countObs.unobserve(e.target);}
+  });
+},{threshold:0.5});
+document.querySelectorAll('[data-t]').forEach(el=>countObs.observe(el));
+
+/* ══════════════════════════════════════
+   VISITOR COUNTER
+══════════════════════════════════════ */
+(function(){
+  const key='md360_v3_'+new Date().toDateString();
+  if(!localStorage.getItem(key+'_b'))localStorage.setItem(key+'_b',85+Math.floor(Math.random()*60));
+  const base=+localStorage.getItem(key+'_b');
+  const prev=+(localStorage.getItem(key)||0);
+  localStorage.setItem(key,prev+1);
+  const target=base+prev+1;
+  const el=document.getElementById('visCount');
+  let c=0;
+  const t=()=>{c+=Math.max(1,Math.floor((target-c)/5));el.textContent=c>=target?target:c;if(c<target)requestAnimationFrame(t);};
+  requestAnimationFrame(t);
+})();
+
+/* ══════════════════════════════════════
+   COUNTDOWN
+══════════════════════════════════════ */
+(function(){
+  const key='md360_cd';
+  let end=+localStorage.getItem(key)||0;
+  if(!end||end<Date.now()){end=Date.now()+1000*60*(60*11+Math.floor(Math.random()*120));localStorage.setItem(key,end);}
+  const pad=n=>String(n).padStart(2,'0');
+  const run=()=>{
+    const d=Math.max(0,end-Date.now());
+    document.getElementById('cdH').textContent=pad(Math.floor(d/3600000));
+    document.getElementById('cdM').textContent=pad(Math.floor(d%3600000/60000));
+    document.getElementById('cdS').textContent=pad(Math.floor(d%60000/1000));
+  };
+  run();setInterval(run,1000);
+})();
+
+/* ══════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════ */
+const testis=[
+  {n:'Konan A.',c:'Abidjan',t:'Mitché a transformé ma façon de travailler. Les prompts IA qu\'il a créés pour mon business m\'économisent 15 heures par semaine. Investissement rentabilisé en 3 jours.',s:5},
+  {n:'Bamba S.',c:'Bouaké',t:'KwaiCut Pro est incroyable. Mes vidéos font 10 à 15 fois plus de vues depuis que je travaille avec Mitché. Ma page TikTok est passée de 500 à 18.000 abonnés.',s:5},
+  {n:'Fatou D.',c:'Yamoussoukro',t:'La Masterclass IA m\'a ouvert les yeux sur un monde de possibilités infinies. J\'ai automatisé toutes mes ventes WhatsApp. Je recommande les yeux fermés !',s:5},
+  {n:'Yao K.',c:'San-Pédro',t:'Smart Stock a révolutionné mon entrepôt. Fini les erreurs de stock et les pertes d\'argent. L\'interface est simple et les rapports sont parfaits pour mes fournisseurs.',s:5},
+  {n:'Aminata C.',c:'Daloa',t:'Mon TikTok a explosé après le Boost. +18.000 abonnés authentiques en un mois. Service fiable, communication excellente et résultats bien au-delà de mes attentes.',s:5},
+  {n:'Seydou T.',c:'Korhogo',t:'La méthode Vente WhatsApp est une mine d\'or absolue. Je ferme 3 à 5 clients par jour maintenant. Le retour sur investissement est de x20. Merci Mitché !',s:5},
+  {n:'Mariam O.',c:'Abidjan Cocody',t:'Professionnalisme impeccable. Livraison dans les délais, qualité irréprochable et un suivi post-livraison que j\'ai rarement vu. Mitché est le meilleur investissement pour mon business.',s:5},
+  {n:'Ibrahim K.',c:'Bouaké',t:'J\'avais des doutes au début, mais après la Masterclass IA, j\'ai compris que c\'était la meilleure décision de ma vie entrepreneuriale. Résultats concrets et immédiats.',s:5},
+];
+const track=document.getElementById('testiTrack');
+track.innerHTML=[...testis,...testis].map(t=>`
+<div class="tc">
+  <span class="tc-q">"</span>
+  <p class="tc-txt">${t.t}</p>
+  <div class="tc-bot">
+    <div class="tc-av">${t.n[0]}</div>
+    <div>
+      <div class="tc-name">${t.n}</div>
+      <div class="tc-loc">📍 ${t.c}</div>
+      <div class="tc-stars">${'★'.repeat(t.s)}</div>
+    </div>
+  </div>
+</div>`).join('');
+
+/* ══════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════ */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>{
+  // stagger via existing inline transition-delay
+  obs.observe(el);
+});
+
+/* ══════════════════════════════════════
+   SERVICE SEARCH
+══════════════════════════════════════ */
+function filterSvc(){
+  const q=document.getElementById('svcSearch').value.toLowerCase();
+  document.querySelectorAll('[data-svc]').forEach(c=>{
+    c.style.display=c.textContent.toLowerCase().includes(q)?'':'none';
+  });
+}
+
+/* ══════════════════════════════════════
+   PORTFOLIO FILTER
+══════════════════════════════════════ */
+function filterPf(cat,btn){
+  document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pf-item').forEach(el=>{
+    el.style.display=(cat==='all'||el.dataset.cat===cat)?'':'none';
+  });
+}
+
+/* ══════════════════════════════════════
+   MODAL
+══════════════════════════════════════ */
+function openModal(title,price,desc,features){
+  document.getElementById('mTitle').textContent=title;
+  document.getElementById('mPrice').textContent=price;
+  document.getElementById('mDesc').textContent=desc;
+  document.getElementById('mFeatures').innerHTML=features.map(f=>`<li>${f}</li>`).join('');
+  document.getElementById('mCta').href='https://wa.me/2250150882462?text='+encodeURIComponent(`Bonjour Mitché ! Je veux commander : ${title} (${price})`);
+  const m=document.getElementById('modal');
+  m.style.display='flex';requestAnimationFrame(()=>m.classList.add('on'));
+}
+function closeModal(){
+  const m=document.getElementById('modal');
+  m.classList.remove('on');setTimeout(()=>m.style.display='none',350);
+}
+window.addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+window.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* ══════════════════════════════════════
+   CONTACT FORM
+══════════════════════════════════════ */
+function sendForm(e){
+  e.preventDefault();
+  const f=e.target;
+  const vals=[...f.querySelectorAll('input,select,textarea')].map(i=>i.value);
+  const txt=`Bonjour Mitché !\n\nNom: ${vals[0]} ${vals[1]}\nTél: ${vals[2]}\nService: ${vals[3]}\nBudget: ${vals[4]}\nMessage: ${vals[5]}`;
+  f.style.display='none';
+  document.getElementById('formOk').style.display='block';
+  setTimeout(()=>{
+    window.open('https://wa.me/2250150882462?text='+encodeURIComponent(txt),'_blank');
+  },1000);
+}
+</script>
 </body>
 </html>
